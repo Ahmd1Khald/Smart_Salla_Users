@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
-import 'package:salla_users/test_theme.dart';
 
 import 'Core/utiles/constance/app_styles.dart';
+import 'Features/root_screens/presentaiton/views/root_screens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             isDarkTheme: themeProvider.getIsDarkTheme,
             context: context,
           ),
-          home: const TestTheme(),
+          home: const RootScreens(),
         );
       }),
     );

@@ -1,3 +1,4 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/custom_listtile.dart';
@@ -21,112 +22,115 @@ class ProfileScreen extends StatelessWidget {
           title: const AppName(),
           leading: Image.asset(AssetsImages.shoppingCart),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Visibility(
-              visible: true,
-              child: PleaseText(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Theme.of(context).cardColor,
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.background,
-                          width: 3),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Visibility(
+                visible: true,
+                child: PleaseText(),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).cardColor,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.background,
+                            width: 3),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: FancyShimmerImage(
+                          imageUrl:
+                              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
                         ),
-                        fit: BoxFit.fill,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 7,
-                  ),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TitlesTextWidget(label: "Ahmed"),
-                      SubtitleTextWidget(label: "Ahmed@gmail.com"),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 24,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TitlesTextWidget(label: "General"),
-                  CustomListTile(
-                    imagePath: AssetsImages.orderSvg,
-                    text: "All orders",
-                    function: () {},
-                  ),
-                  CustomListTile(
-                    imagePath: AssetsImages.wishlistSvg,
-                    text: "Wishlist",
-                    function: () {},
-                  ),
-                  CustomListTile(
-                    imagePath: AssetsImages.recent,
-                    text: "Viewed recently",
-                    function: () {},
-                  ),
-                  CustomListTile(
-                    imagePath: AssetsImages.address,
-                    text: "Address",
-                    function: () {},
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  const TitlesTextWidget(label: "Settings"),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  SwitchListTile(
-                    secondary: Image.asset(
-                      AssetsImages.theme,
-                      height: 30,
+                    const SizedBox(
+                      width: 7,
                     ),
-                    title: Text(themeProvider.getIsDarkTheme
-                        ? "Dark mode"
-                        : "Light mode"),
-                    value: themeProvider.getIsDarkTheme,
-                    onChanged: (value) {
-                      themeProvider.setIsDarkTheme(themeValue: value);
-                    },
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                ],
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TitlesTextWidget(label: "Ahmed"),
+                        SubtitleTextWidget(label: "Ahmed@gmail.com"),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            LogOutButton(
-              function: () {},
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 24,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TitlesTextWidget(label: "General"),
+                    CustomListTile(
+                      imagePath: AssetsImages.orderSvg,
+                      text: "All orders",
+                      function: () {},
+                    ),
+                    CustomListTile(
+                      imagePath: AssetsImages.wishlistSvg,
+                      text: "Wishlist",
+                      function: () {},
+                    ),
+                    CustomListTile(
+                      imagePath: AssetsImages.recent,
+                      text: "Viewed recently",
+                      function: () {},
+                    ),
+                    CustomListTile(
+                      imagePath: AssetsImages.address,
+                      text: "Address",
+                      function: () {},
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    const TitlesTextWidget(label: "Settings"),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    SwitchListTile(
+                      secondary: Image.asset(
+                        AssetsImages.theme,
+                        height: 30,
+                      ),
+                      title: Text(themeProvider.getIsDarkTheme
+                          ? "Dark mode"
+                          : "Light mode"),
+                      value: themeProvider.getIsDarkTheme,
+                      onChanged: (value) {
+                        themeProvider.setIsDarkTheme(themeValue: value);
+                      },
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                  ],
+                ),
+              ),
+              LogOutButton(
+                function: () {},
+              )
+            ],
+          ),
         ));
   }
 }

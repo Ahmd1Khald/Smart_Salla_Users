@@ -5,10 +5,10 @@ import 'package:salla_users/Features/profile/presentation/views/widgets/logout_b
 import 'package:salla_users/Features/profile/presentation/views/widgets/please_text.dart';
 
 import '../../../../Core/providers/theme_provider.dart';
-import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
+import '../../../../Core/utiles/widgets/app_name.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.profileScreen),
+          title: const AppName(),
           leading: Image.asset(AssetsImages.shoppingCart),
         ),
         body: Column(

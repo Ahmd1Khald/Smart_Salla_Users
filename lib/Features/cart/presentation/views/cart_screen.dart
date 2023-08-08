@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salla_users/Features/cart/presentation/views/widgets/CartCustomBottomSheet.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/cart_widget.dart';
 
 import '../../../../Core/utiles/constance/app_strings.dart';
@@ -24,6 +25,7 @@ class CartScreen extends StatelessWidget {
             ),
           )
         : Scaffold(
+            bottomSheet: const CartBottomSheet(),
             appBar: AppBar(
               title: const TitlesTextWidget(
                 label: AppStrings.shoppingBasketString,

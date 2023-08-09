@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salla_users/Features/cart/presentation/views/widgets/CartCustomBottomSheet.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/cart_widget.dart';
+import 'package:salla_users/Features/cart/presentation/views/widgets/checkout_bottom_sheet.dart';
 
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';

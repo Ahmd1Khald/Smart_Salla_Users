@@ -49,10 +49,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       prefixIcon: const Icon(Icons.search),
                       suffixIcon: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            searchTextController.clear();
-                            FocusScope.of(context).unfocus();
-                          });
+                          searchTextController.clear();
+                          FocusScope.of(context).unfocus();
                         },
                         child: const Icon(
                           Icons.clear,

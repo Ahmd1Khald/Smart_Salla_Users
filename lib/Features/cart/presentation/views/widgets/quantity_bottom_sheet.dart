@@ -21,7 +21,7 @@ class QuantityBottomSheet extends StatelessWidget {
           child: ListView.builder(
             itemCount: 40,
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: InkWell(
                 onTap: () {
                   print("index $index");

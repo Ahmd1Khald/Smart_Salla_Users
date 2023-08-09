@@ -4,7 +4,7 @@ import 'package:salla_users/Features/cart/presentation/views/widgets/checkout_bo
 
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
-import '../../../../Core/utiles/constance/text_styles/title_text.dart';
+import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 
 class CartScreen extends StatelessWidget {
@@ -26,21 +26,17 @@ class CartScreen extends StatelessWidget {
           )
         : Scaffold(
             bottomSheet: const CartBottomSheet(),
-            appBar: AppBar(
-              title: const TitlesTextWidget(
-                label: AppStrings.shoppingBasketString,
-                fontSize: 20,
-              ),
-              leading: Image.asset(AssetsImages.shoppingCart),
-              actions: [
+            appBar: customAppBar(
+              [
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
                     Icons.delete_forever_rounded,
                     color: Colors.red,
                   ),
-                ),
+                )
               ],
+              title: AppStrings.shoppingBasketString,
             ),
             body: ListView.builder(
               itemBuilder: (context, index) => const CartWidget(),

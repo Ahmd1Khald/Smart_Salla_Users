@@ -6,6 +6,8 @@ class AppStrings {
   static const cartEmptyString = 'Your cart is empty';
   static const shopNowString = 'Shop now';
   static const shoppingBasketString = 'Shopping basket';
+  static const searchString = 'Search';
+  static const homeString = 'Home';
 
   static const looksLikeCartString =
       'Looks like you have not added anything to your cart.\nGo ahead & explore top categories';

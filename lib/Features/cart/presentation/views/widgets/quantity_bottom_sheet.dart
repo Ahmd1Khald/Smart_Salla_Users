@@ -24,11 +24,11 @@ class QuantityBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
                 onTap: () {
-                  print(index);
+                  print("index $index");
                 },
                 child: Center(
                   child: TitlesTextWidget(
-                    label: index.toString(),
+                    label: "${index + 1}",
                   ),
                 ),
               ),

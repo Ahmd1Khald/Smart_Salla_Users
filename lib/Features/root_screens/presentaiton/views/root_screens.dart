@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Features/cart/presentation/views/cart_screen.dart';
 import 'package:salla_users/Features/home/presentation/views/home_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/profile_screen.dart';
@@ -62,7 +63,13 @@ class _RootScreensState extends State<RootScreens> {
           ),
           NavigationDestination(
             selectedIcon: Icon(IconlyBold.bag),
-            icon: Icon(IconlyLight.bag),
+            icon: Badge(
+              label: SubtitleTextWidget(
+                label: '5',
+                fontSize: 11,
+              ),
+              child: Icon(IconlyLight.bag),
+            ),
             label: 'Cart',
           ),
           NavigationDestination(

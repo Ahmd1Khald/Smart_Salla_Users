@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:salla_users/Features/cart/presentation/views/widgets/product_image.dart';
+import 'package:salla_users/Core/utiles/widgets/product_image.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/product_name.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/product_price.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/quantity_bottom_sheet.dart';
@@ -21,6 +21,8 @@ class CartWidget extends StatelessWidget {
           child: Row(
             children: [
               const ProductImage(
+                  borderR: 12,
+                  size: 0.2,
                   image: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png'),
               const SizedBox(
                 width: 10.0,

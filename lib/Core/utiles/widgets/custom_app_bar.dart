@@ -7,7 +7,7 @@ AppBar customAppBar(List<Widget>? action, {required String title}) {
   return AppBar(
     title: TitlesTextWidget(
       label: title,
-      fontSize: 20,
+      fontSize: 22,
     ),
     leading: Image.asset(AssetsImages.shoppingCart),
     actions: action ?? [],

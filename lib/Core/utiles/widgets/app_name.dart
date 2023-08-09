@@ -14,7 +14,7 @@ class AppName extends StatelessWidget {
       highlightColor: Colors.red,
       child: const TitlesTextWidget(
         label: 'Smart Salla',
-        fontSize: 20,
+        fontSize: 22,
       ),
     );
   }

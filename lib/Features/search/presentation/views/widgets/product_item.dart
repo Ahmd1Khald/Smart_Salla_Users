@@ -25,14 +25,24 @@ class ProductItem extends StatelessWidget {
               image: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
               size: 0.22,
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
-                Expanded(child: TitlesTextWidget(label: 'Title' * 10)),
+                Expanded(
+                    child: TitlesTextWidget(
+                  label: 'Title' * 10,
+                  maxLines: 2,
+                )),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(IconlyLight.heart),
                 )
               ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Row(
               children: [

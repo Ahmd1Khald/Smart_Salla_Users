@@ -11,17 +11,21 @@ class LastArrivalProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              FancyShimmerImage(
-                imageUrl: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
-                width: AppConst.size(context).width * 0.2,
-                height: AppConst.size(context).height * 0.12,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: FancyShimmerImage(
+                  imageUrl:
+                      'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                  width: AppConst.size(context).width * 0.2,
+                  height: AppConst.size(context).height * 0.12,
+                ),
               ),
               const SizedBox(
                 width: 10,
@@ -40,7 +44,7 @@ class LastArrivalProduct extends StatelessWidget {
                       IconButton(
                           onPressed: () {},
                           icon: const Icon(IconlyLight.heart)),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       IconButton(

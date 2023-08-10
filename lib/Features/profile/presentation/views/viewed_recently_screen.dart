@@ -8,8 +8,8 @@ import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 import '../../../search/presentation/views/widgets/product_item.dart';
 
-class WishListScreen extends StatelessWidget {
-  const WishListScreen({Key? key}) : super(key: key);
+class ViewedRecentlyScreen extends StatelessWidget {
+  const ViewedRecentlyScreen({Key? key}) : super(key: key);
 
   final bool isEmpty = false;
 
@@ -18,9 +18,9 @@ class WishListScreen extends StatelessWidget {
     return isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
-              title: AppStrings.whoopsWishListString,
+              title: AppStrings.whoopsViewedRecentlyString,
               subTitle: AppStrings.wishListEmptyString,
-              body: AppStrings.looksLikeWishListString,
+              body: AppStrings.looksLikeViewedRecentlyString,
               buttonText: AppStrings.shopNowString,
               image: AssetsImages.bagWish,
             ),
@@ -49,7 +49,7 @@ class WishListScreen extends StatelessWidget {
                   width: 8,
                 ),
               ],
-              title: 'Wishlist (1)',
+              title: 'Viewed Recently (1)',
             ),
             body: SingleChildScrollView(
               child: Padding(

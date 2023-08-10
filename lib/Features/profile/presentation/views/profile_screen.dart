@@ -90,7 +90,10 @@ class ProfileScreen extends StatelessWidget {
                     CustomListTile(
                       imagePath: AssetsImages.recent,
                       text: "Viewed recently",
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(
+                            context, Routes.viewedRecentlyRoute);
+                      },
                     ),
                     CustomListTile(
                       imagePath: AssetsImages.address,

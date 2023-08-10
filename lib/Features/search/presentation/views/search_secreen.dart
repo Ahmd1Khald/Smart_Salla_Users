@@ -76,7 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           },
                           child: const ProductItem()),
                     ),
-                    itemCount: 200,
+                    itemCount: 10,
                     crossAxisCount: 2,
                   )
                 ],

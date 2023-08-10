@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               ),
               const HomeConstTitle(title: AppStrings.latestArrivalString),
               SizedBox(
-                height: AppConst.size(context).height * 0.135,
+                height: AppConst.size(context).height * 0.147,
                 child: ListView.builder(
                   itemCount: 10,
                   itemBuilder: (context, index) => InkWell(

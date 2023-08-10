@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
+import 'package:salla_users/Features/profile/presentation/views/viewed_recently_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/wish_list_screen.dart';
 
 import '../Features/home/presentation/views/product_details.dart';
@@ -16,6 +17,8 @@ class Routes {
 
   static const String wishListRoute = "/wishlist";
 
+  static const String viewedRecentlyRoute = "/viewedRecently";
+
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailsRoute:
@@ -24,6 +27,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const RootScreens());
       case Routes.wishListRoute:
         return MaterialPageRoute(builder: (_) => const WishListScreen());
+      case Routes.viewedRecentlyRoute:
+        return MaterialPageRoute(builder: (_) => const ViewedRecentlyScreen());
       default:
         return unDefinedRoute();
     }

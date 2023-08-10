@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
+import 'package:salla_users/Features/profile/presentation/views/wish_list_screen.dart';
 
 import '../Features/home/presentation/views/product_details.dart';
 import '../Features/root_screens/presentaiton/views/root_screens.dart';
@@ -13,12 +14,16 @@ class Routes {
 
   static const String productDetailsRoute = "/productDetails";
 
+  static const String wishListRoute = "/wishlist";
+
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailsRoute:
         return MaterialPageRoute(builder: (_) => const ProductDetails());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const RootScreens());
+      case Routes.wishListRoute:
+        return MaterialPageRoute(builder: (_) => const WishListScreen());
       default:
         return unDefinedRoute();
     }

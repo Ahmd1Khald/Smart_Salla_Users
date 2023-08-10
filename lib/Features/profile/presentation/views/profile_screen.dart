@@ -6,6 +6,7 @@ import 'package:salla_users/Features/profile/presentation/views/widgets/logout_b
 import 'package:salla_users/Features/profile/presentation/views/widgets/please_text.dart';
 
 import '../../../../Core/providers/theme_provider.dart';
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
@@ -82,7 +83,9 @@ class ProfileScreen extends StatelessWidget {
                     CustomListTile(
                       imagePath: AssetsImages.wishlistSvg,
                       text: "Wishlist",
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(context, Routes.wishListRoute);
+                      },
                     ),
                     CustomListTile(
                       imagePath: AssetsImages.recent,

@@ -21,7 +21,7 @@ class CartScreen extends StatelessWidget {
               subTitle: AppStrings.cartEmptyString,
               body: AppStrings.looksLikeCartString,
               buttonText: AppStrings.shopNowString,
-              image: AssetsImages.shoppingBasket,
+              image: AssetsImages.bagWish,
             ),
           )
         : Scaffold(

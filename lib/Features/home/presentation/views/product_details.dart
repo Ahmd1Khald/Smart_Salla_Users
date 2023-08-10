@@ -80,7 +80,19 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const HeartButtonWidget(),
+                      Material(
+                        borderRadius: BorderRadius.circular(16.0),
+                        color: Colors.lightBlue,
+                        child: InkWell(
+                          splashColor: Colors.red,
+                          borderRadius: BorderRadius.circular(16.0),
+                          onTap: () {},
+                          child: const Padding(
+                            padding: EdgeInsets.all(1.5),
+                            child: HeartButtonWidget(),
+                          ),
+                        ),
+                      ),
                       const SizedBox(
                         width: 10,
                       ),

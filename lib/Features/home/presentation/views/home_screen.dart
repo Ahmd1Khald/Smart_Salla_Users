@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:salla_users/Features/home/presentation/views/widgets/banner_widget.dart';
 
-import '../../../../Core/utiles/constance/app_strings.dart';
-import '../../../../Core/utiles/widgets/custom_app_bar.dart';
+import '../../../../Core/utiles/constance/const_variable.dart';
+import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,9 +10,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: AppStrings.homeString, []),
-      body: const Center(
-        child: Text(AppStrings.homeString),
+      appBar: shimmerAppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          children: [
+            BannerWidget(
+              banners: AppConst.banners,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ import '../../../../Core/providers/theme_provider.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
-import '../../../../Core/utiles/widgets/app_name.dart';
+import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,10 +18,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: const AppName(),
-          leading: Image.asset(AssetsImages.shoppingCart),
-        ),
+        appBar: shimmerAppBar(),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

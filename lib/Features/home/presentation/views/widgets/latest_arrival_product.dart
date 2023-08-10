@@ -1,13 +1,14 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 
 import '../../../../../Core/utiles/constance/const_variable.dart';
+import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 
 class LastArrivalProduct extends StatelessWidget {
-  const LastArrivalProduct({Key? key}) : super(key: key);
+  const LastArrivalProduct({Key? key, required this.image}) : super(key: key);
 
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,8 +22,7 @@ class LastArrivalProduct extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: FancyShimmerImage(
-                  imageUrl:
-                      'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                  imageUrl: image,
                   width: AppConst.size(context).width * 0.2,
                   height: AppConst.size(context).height * 0.12,
                 ),
@@ -41,9 +41,7 @@ class LastArrivalProduct extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(IconlyLight.heart)),
+                      const HeartButtonWidget(),
                       const SizedBox(
                         width: 20,
                       ),

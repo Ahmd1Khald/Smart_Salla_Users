@@ -35,7 +35,10 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, Routes.productDetailsRoute);
                     },
-                    child: const LastArrivalProduct(),
+                    child: const LastArrivalProduct(
+                      image:
+                          'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+                    ),
                   ),
                   scrollDirection: Axis.horizontal,
                 ),

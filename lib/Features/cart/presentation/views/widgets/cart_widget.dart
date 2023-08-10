@@ -5,6 +5,7 @@ import 'package:salla_users/Features/cart/presentation/views/widgets/product_nam
 import 'package:salla_users/Features/cart/presentation/views/widgets/product_price.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/quantity_bottom_sheet.dart';
 
+import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/quantity_outlined_button_style.dart';
 
 class CartWidget extends StatelessWidget {
@@ -43,13 +44,7 @@ class CartWidget extends StatelessWidget {
                                 color: Colors.red,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                IconlyLight.heart,
-                                color: Colors.red,
-                              ),
-                            ),
+                            const HeartButtonWidget(),
                           ],
                         ),
                       ],

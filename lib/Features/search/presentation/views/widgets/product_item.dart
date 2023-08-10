@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 
+import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/product_image.dart';
 
 class ProductItem extends StatelessWidget {
@@ -31,10 +31,7 @@ class ProductItem extends StatelessWidget {
                 label: 'Title' * 10,
                 maxLines: 2,
               )),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(IconlyLight.heart),
-              )
+              const HeartButtonWidget(),
             ],
           ),
           const SizedBox(

@@ -6,6 +6,13 @@ import 'app_name.dart';
 AppBar shimmerAppBar() {
   return AppBar(
     title: const AppName(),
-    leading: Image.asset(AssetsImages.shoppingCart),
+    leading: Row(
+      children: [
+        const SizedBox(
+          width: 10,
+        ),
+        Image.asset(AssetsImages.shoppingCart, width: 46),
+      ],
+    ),
   );
 }

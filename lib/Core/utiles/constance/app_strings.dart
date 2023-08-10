@@ -1,5 +1,6 @@
 class AppStrings {
   static const appName = 'Salla Users';
+  static const noRoute = 'No page found';
   static const profileScreen = 'Profile Screen';
   static const pleaseString = "Please login to have ultimate access";
   static const whoopsCartString = 'Whoops!';
@@ -9,6 +10,7 @@ class AppStrings {
   static const searchString = 'Search';
   static const homeString = 'Home';
   static const latestArrivalString = 'Latest arrival';
+  static const categoriesString = 'Categories';
 
   static const looksLikeCartString =
       'Looks like you have not added anything to your cart.\nGo ahead & explore top categories';

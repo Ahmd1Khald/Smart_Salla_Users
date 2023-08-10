@@ -14,63 +14,58 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.only(
         top: 10.0,
       ),
-      child: InkWell(
-        onTap: () {
-          ///todo navigate to product selected
-        },
-        child: Column(
-          children: [
-            const ProductImage(
-              borderR: 25,
-              image: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
-              size: 0.22,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Expanded(
-                    child: TitlesTextWidget(
-                  label: 'Title' * 10,
-                  maxLines: 2,
-                )),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(IconlyLight.heart),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                const Expanded(
-                    child: SubtitleTextWidget(
-                  label: '166.5\$',
-                  fontSize: 21,
-                )),
-                Material(
+      child: Column(
+        children: [
+          const ProductImage(
+            borderR: 25,
+            image: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+            size: 0.22,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: TitlesTextWidget(
+                label: 'Title' * 10,
+                maxLines: 2,
+              )),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(IconlyLight.heart),
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              const Expanded(
+                  child: SubtitleTextWidget(
+                label: '166.5\$',
+                fontSize: 21,
+              )),
+              Material(
+                borderRadius: BorderRadius.circular(16.0),
+                color: Colors.lightBlue,
+                child: InkWell(
+                  splashColor: Colors.red,
                   borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.lightBlue,
-                  child: InkWell(
-                    splashColor: Colors.red,
-                    borderRadius: BorderRadius.circular(16.0),
-                    onTap: () {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.add_shopping_cart_rounded,
-                        size: 21,
-                      ),
+                  onTap: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.add_shopping_cart_rounded,
+                      size: 21,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

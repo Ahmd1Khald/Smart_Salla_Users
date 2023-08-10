@@ -9,7 +9,14 @@ AppBar customAppBar(List<Widget>? action, {required String title}) {
       label: title,
       fontSize: 22,
     ),
-    leading: Image.asset(AssetsImages.shoppingCart),
+    leading: Row(
+      children: [
+        const SizedBox(
+          width: 10,
+        ),
+        Image.asset(AssetsImages.shoppingCart, width: 46),
+      ],
+    ),
     actions: action ?? [],
   );
 }

@@ -4,6 +4,7 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:salla_users/Features/search/presentation/views/widgets/product_item.dart';
 
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 
@@ -66,9 +67,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   DynamicHeightGridView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    builder: (context, index) => const Padding(
-                      padding: EdgeInsets.only(top: 10.0),
-                      child: ProductItem(),
+                    builder: (context, index) => Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, Routes.productDetailsRoute);
+                          },
+                          child: const ProductItem()),
                     ),
                     itemCount: 200,
                     crossAxisCount: 2,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/assets_images.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/signin_google_button.dart';
 
+import '../../../../../Core/root_manager.dart';
 import '../../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../../Core/utiles/constance/text_styles/title_text.dart';
 import 'guest_button.dart';
@@ -66,7 +67,9 @@ class BaskGroundWidget extends StatelessWidget {
                     fontSize: 16,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.registerRoute);
+                    },
                     child: const SubtitleTextWidget(
                       label: 'Sign Up',
                       color: Colors.white,

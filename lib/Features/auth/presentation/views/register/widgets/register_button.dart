@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 
-import '../../../../../Core/utiles/constance/app_color.dart';
-import '../../../../../Core/utiles/constance/const_variable.dart';
+import '../../../../../../Core/utiles/constance/app_color.dart';
+import '../../../../../../Core/utiles/constance/const_variable.dart';
 
-class LoginButton extends StatelessWidget {
-  LoginButton({
+class RegisterButton extends StatelessWidget {
+  RegisterButton({
     Key? key,
     formKey,
     required this.onPressed,
@@ -44,7 +44,7 @@ class LoginButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TitlesTextWidget(
-              label: 'Sign in',
+              label: 'Sign up',
               color: Colors.white,
             ),
             Icon(

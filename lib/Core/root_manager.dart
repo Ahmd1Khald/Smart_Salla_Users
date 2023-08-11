@@ -3,14 +3,15 @@ import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/profile/presentation/views/viewed_recently_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/wish_list_screen.dart';
 
-import '../Features/auth/presentation/views/register.dart';
+import '../Features/auth/presentation/views/login_screen.dart';
+import '../Features/auth/presentation/views/register/register_screen.dart';
 import '../Features/home/presentation/views/product_details.dart';
 import '../Features/root_screens/presentaiton/views/root_screens.dart';
 
 class Routes {
   static const String splashRoute = "/";
 
-  static const String registerRoute = "/register";
+  static const String loginRoute = "/login";
 
   static const String homeRoute = "/home";
 
@@ -20,7 +21,7 @@ class Routes {
 
   static const String viewedRecentlyRoute = "/viewedRecently";
 
-  static const String registerScreenRoute = "/RegisterScreen";
+  static const String registerRoute = "/RegisterScreen";
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -32,7 +33,9 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const WishListScreen());
       case Routes.viewedRecentlyRoute:
         return MaterialPageRoute(builder: (_) => const ViewedRecentlyScreen());
-      case Routes.registerScreenRoute:
+      case Routes.loginRoute:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
       default:
         return unDefinedRoute();

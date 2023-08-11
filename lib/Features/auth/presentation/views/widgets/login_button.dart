@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 
 import '../../../../../Core/utiles/constance/app_color.dart';
+import '../../../../../Core/utiles/constance/const_variable.dart';
 
 class LoginButton extends StatelessWidget {
   LoginButton({
@@ -17,6 +18,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.6,
+      height: AppConst.size(context).width * 0.13,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
@@ -31,6 +33,11 @@ class LoginButton extends StatelessWidget {
         ),
       ),
       child: MaterialButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        height: AppConst.size(context).width * 0.13,
+        splashColor: Colors.blue,
         onPressed: onPressed,
         child: const TitlesTextWidget(label: 'Sign in'),
       ),

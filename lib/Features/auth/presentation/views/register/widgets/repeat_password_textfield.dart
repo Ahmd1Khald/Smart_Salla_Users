@@ -47,7 +47,7 @@ class _RepeatPassTextFieldState extends State<RepeatPassTextField> {
       obscureText: _obscureText,
       keyboardType: TextInputType.visiblePassword,
       validator: (value) {
-        if (widget.passController1 != widget.passController2) {
+        if (widget.passController1.text != widget.passController2.text) {
           return 'password not not compatible';
         }
         return null;

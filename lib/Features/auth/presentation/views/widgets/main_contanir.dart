@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
-import 'package:salla_users/Features/auth/presentation/views/widgets/password_textfield.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/register_title.dart';
 
+import '../../../../../Core/utiles/widgets/email_textfield.dart';
+import '../../../../../Core/utiles/widgets/password_textfield.dart';
 import '../../../../../Core/utiles/widgets/shadow.dart';
-import 'email_textfield.dart';
 import 'login_button.dart';
 
 class MainContainer extends StatelessWidget {

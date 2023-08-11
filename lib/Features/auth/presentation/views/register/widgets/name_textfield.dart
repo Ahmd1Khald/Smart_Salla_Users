@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NameTextField extends StatefulWidget {
-  const NameTextField({
-    Key? key,
-    required this.nameController,
-  }) : super(key: key);
   final TextEditingController nameController;
+  const NameTextField({
+    super.key,
+    required this.nameController,
+  });
 
   @override
   State<NameTextField> createState() => _NameTextFieldState();
@@ -22,11 +21,16 @@ class _NameTextFieldState extends State<NameTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // style: AppStyles.hintText,
+      // cursorColor: AppColors.lightGrey,
       decoration: const InputDecoration(
-        prefixIcon: Icon(
-          FontAwesomeIcons.user,
-        ),
         hintText: 'Enter your name',
+        // hintStyle: AppStyles.hintText,
+        // focusColor: AppColors.lightGrey,
+        // fillColor: AppColors.lightGrey,
+        prefixIcon: Icon(
+          Icons.person_2_outlined,
+        ),
       ),
       controller: widget.nameController,
       keyboardType: TextInputType.name,

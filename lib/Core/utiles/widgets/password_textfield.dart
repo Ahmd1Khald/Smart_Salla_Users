@@ -23,6 +23,11 @@ class _PassTextFieldState extends State<PassTextField> {
     });
   }
 
+  void dispose() {
+    widget.passController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(

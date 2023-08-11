@@ -5,9 +5,9 @@ import 'package:salla_users/Features/auth/presentation/views/register/widgets/re
 
 import '../../../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../../../Core/utiles/constance/text_styles/title_text.dart';
-import 'email_textfield.dart';
+import '../../../../../../Core/utiles/widgets/email_textfield.dart';
+import '../../../../../../Core/utiles/widgets/password_textfield.dart';
 import 'name_textfield.dart';
-import 'password_textfield.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({
@@ -21,87 +21,88 @@ class RegisterBody extends StatelessWidget {
     var repeatPassController = TextEditingController();
     var nameController = TextEditingController();
     var formKey = GlobalKey<FormState>();
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 40.0, right: 30, left: 30),
             child: Form(
               key: formKey,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40.0, right: 30, left: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // PutUserImage(
-                    //   image: RegisterCubit.get(context).userImage,
-                    //   onPressed: () {
-                    //     //RegisterCubit.get(context).setImage();
-                    //   },
-                    // ),
-                    const SizedBox(
-                      height: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // PutUserImage(
+                  //   image: RegisterCubit.get(context).userImage,
+                  //   onPressed: () {
+                  //     //RegisterCubit.get(context).setImage();
+                  //   },
+                  // ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const RegisterTitle(
+                    title: 'Register to get started !',
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  NameTextField(
+                    nameController: nameController,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  EmailTextField(emailController: emailController),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  PassTextField(
+                    passController: passController,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  RepeatPassTextField(
+                    passController1: repeatPassController,
+                    passController2: passController,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Center(
+                    child: RegisterButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          print(nameController.text);
+                          print(emailController.text);
+                          print(passController.text);
+                          print(repeatPassController.text);
+                        }
+                      },
                     ),
-                    const RegisterTitle(
-                      title: 'Register to get started!',
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    NameTextField(
-                      nameController: nameController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    EmailTextField(emailController: emailController),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    PassTextField(
-                      passController: passController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    RepeatPassTextField(
-                        passController1: repeatPassController,
-                        passController2: passController),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Center(
-                      child: RegisterButton(
-                        onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const TitlesTextWidget(
+                        label: 'Do you have an account? ',
+                        color: Colors.blue,
+                        fontSize: 16,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const TitlesTextWidget(
-                          label: 'Do you have an account? ',
-                          color: Colors.white,
-                          fontSize: 16,
+                      TextButton(
+                        onPressed: () {},
+                        child: const SubtitleTextWidget(
+                          label: 'Sign Up',
+                          color: Colors.blue,
+                          textDecoration: TextDecoration.underline,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {}
-                          },
-                          child: const SubtitleTextWidget(
-                            label: 'Sign Up',
-                            color: Colors.white,
-                            textDecoration: TextDecoration.underline,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),

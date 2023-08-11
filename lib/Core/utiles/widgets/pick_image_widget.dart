@@ -18,6 +18,7 @@ class PickImageWidget extends StatelessWidget {
             child: pickedImage == null
                 ? Container(
                     decoration: BoxDecoration(
+                      color: Colors.grey,
                       borderRadius: BorderRadius.circular(8.0),
                       border: Border.all(),
                     ),

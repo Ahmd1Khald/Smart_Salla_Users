@@ -12,6 +12,7 @@ Future<void> imagePickerDialog({
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: const Center(
           child: TitlesTextWidget(
             label: "Choose option",

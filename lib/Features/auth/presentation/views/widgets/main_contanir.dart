@@ -22,7 +22,7 @@ class MainContainer extends StatelessWidget {
         boxShadow: [
           shadow(),
         ],
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(40),
         border: Border.all(color: Colors.white24),
       ),

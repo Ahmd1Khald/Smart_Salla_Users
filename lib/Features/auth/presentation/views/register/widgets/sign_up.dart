@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../../../Core/utiles/constance/text_styles/title_text.dart';
 
-class SignUpWidget extends StatelessWidget {
-  const SignUpWidget({Key? key, required this.function}) : super(key: key);
+class SignInWidget extends StatelessWidget {
+  const SignInWidget({Key? key, required this.function}) : super(key: key);
 
   final VoidCallback function;
   @override
@@ -20,7 +20,7 @@ class SignUpWidget extends StatelessWidget {
         TextButton(
           onPressed: function,
           child: const SubtitleTextWidget(
-            label: 'Sign Up',
+            label: 'Sign In',
             color: Colors.blue,
             textDecoration: TextDecoration.underline,
           ),

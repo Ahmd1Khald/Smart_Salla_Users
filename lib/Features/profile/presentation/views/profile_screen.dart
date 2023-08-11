@@ -135,7 +135,9 @@ class ProfileScreen extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return const AlertWidget(
+                      return AlertWidget(
+                        func1: () {},
+                        func2: () {},
                         title: 'Are you sure ?',
                         subTitle1: 'NO',
                         subTitle2: 'YES',

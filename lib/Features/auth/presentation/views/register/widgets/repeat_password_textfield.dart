@@ -34,7 +34,7 @@ class _RepeatPassTextFieldState extends State<RepeatPassTextField> {
         prefixIcon: const Icon(
           IconlyLight.lock,
         ),
-        hintText: 'Enter your password',
+        hintText: 'Repeat your password',
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,

@@ -9,12 +9,17 @@ class AlertWidget extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.subTitle1,
-      required this.subTitle2})
+      required this.subTitle2,
+      required this.func1,
+      required this.func2})
       : super(key: key);
 
   final String title;
   final String subTitle1;
   final String subTitle2;
+
+  final VoidCallback func1;
+  final VoidCallback func2;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -33,7 +38,7 @@ class AlertWidget extends StatelessWidget {
             ),
             SubtitleTextWidget(
               label: title,
-              fontSize: 20,
+              fontSize: 17,
             ),
             SizedBox(
               height: AppConst.size(context).height * 0.03,
@@ -42,9 +47,7 @@ class AlertWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: func1,
                   child: SubtitleTextWidget(
                     label: subTitle1,
                     color: Colors.red,
@@ -54,7 +57,7 @@ class AlertWidget extends StatelessWidget {
                   width: 10,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: func2,
                   child: SubtitleTextWidget(
                     label: subTitle2,
                     color: Colors.green,

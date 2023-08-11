@@ -10,6 +10,7 @@ import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
+import '../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -130,7 +131,18 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               LogOutButton(
-                function: () {},
+                function: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const AlertWidget(
+                        title: 'Are you sure ?',
+                        subTitle1: 'NO',
+                        subTitle2: 'YES',
+                      );
+                    },
+                  );
+                },
               )
             ],
           ),

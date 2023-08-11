@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           ),
           //home: const RootScreens(),
           onGenerateRoute: Routes.getRoute,
-          initialRoute: Routes.homeRoute,
+          initialRoute: Routes.registerScreenRoute,
         );
       }),
     );

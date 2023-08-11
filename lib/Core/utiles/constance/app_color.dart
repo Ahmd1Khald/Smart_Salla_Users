@@ -7,4 +7,6 @@ class AppColors {
   static const Color darkPrimary = Color.fromARGB(255, 94, 75, 236);
   static const Color lightCardColor = Color.fromARGB(106, 250, 250, 250);
   static const Color darkCardColor = Color.fromARGB(255, 13, 6, 37);
+  static Color colorGradient1 = const Color(0xff0062BD);
+  static Color lineColor = Colors.blue;
 }

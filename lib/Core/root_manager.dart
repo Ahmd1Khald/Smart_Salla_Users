@@ -3,6 +3,7 @@ import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/profile/presentation/views/viewed_recently_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/wish_list_screen.dart';
 
+import '../Features/auth/presentation/views/register.dart';
 import '../Features/home/presentation/views/product_details.dart';
 import '../Features/root_screens/presentaiton/views/root_screens.dart';
 
@@ -19,6 +20,8 @@ class Routes {
 
   static const String viewedRecentlyRoute = "/viewedRecently";
 
+  static const String registerScreenRoute = "/RegisterScreen";
+
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailsRoute:
@@ -29,6 +32,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const WishListScreen());
       case Routes.viewedRecentlyRoute:
         return MaterialPageRoute(builder: (_) => const ViewedRecentlyScreen());
+      case Routes.registerScreenRoute:
+        return MaterialPageRoute(builder: (_) => const RegisterScreen());
       default:
         return unDefinedRoute();
     }

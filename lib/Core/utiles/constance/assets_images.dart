@@ -40,4 +40,6 @@ class AssetsImages {
   static String cosmetics = "$categoriesPath/cosmetics.png";
   static String shoes = "$categoriesPath/shoes.png";
   static String pc = "$categoriesPath/pc.png";
+  static const String googleIcon = "$basePath/google icon.png";
+  static const String loginCover = "$basePath/Tablet login-amico.png";
 }

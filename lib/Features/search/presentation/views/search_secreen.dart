@@ -94,9 +94,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                 prodName: value,
                                 passedList: productList,
                               );
-                              print(searchResultList);
-                              print('-----------');
-                              print(value);
                             });
                           },
                           onSubmitted: (value) {

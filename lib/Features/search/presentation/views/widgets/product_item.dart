@@ -8,6 +8,7 @@ import 'package:salla_users/Features/home/presentation/views/product_details.dar
 
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/product_image.dart';
+import '../../../../cart/presentation/controller/provider/cart_provider.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
@@ -24,6 +25,7 @@ class ProductItem extends StatelessWidget {
     //final productModelProvider = Provider.of<ProductModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
     final getCurrProduct = productProvider.findProductId(proId: productId);
+    final cartProvider = Provider.of<CartProvider>(context);
 
     return getCurrProduct == null
         ? const SizedBox.shrink()
@@ -76,11 +78,17 @@ class ProductItem extends StatelessWidget {
                         child: InkWell(
                           splashColor: Colors.red,
                           borderRadius: BorderRadius.circular(16.0),
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          onTap: () {
+                            cartProvider.addProductToCart(
+                                productId: getCurrProduct.productId);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Icon(
-                              Icons.add_shopping_cart_rounded,
+                              cartProvider.isProductInCart(
+                                      productID: getCurrProduct.productId)
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_rounded,
                               size: 21,
                             ),
                           ),

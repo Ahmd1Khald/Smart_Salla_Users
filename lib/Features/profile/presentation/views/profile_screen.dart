@@ -79,7 +79,9 @@ class ProfileScreen extends StatelessWidget {
                     CustomListTile(
                       imagePath: AssetsImages.orderSvg,
                       text: "All orders",
-                      function: () {},
+                      function: () {
+                        Navigator.pushNamed(context, Routes.ordersRoute);
+                      },
                     ),
                     CustomListTile(
                       imagePath: AssetsImages.wishlistSvg,
@@ -136,7 +138,9 @@ class ProfileScreen extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertWidget(
-                        func1: () {},
+                        func1: () {
+                          Navigator.pop(context);
+                        },
                         func2: () {},
                         title: 'Are you sure ?',
                         subTitle1: 'NO',

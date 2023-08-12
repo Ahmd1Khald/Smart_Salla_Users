@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/register_title.dart';
 
+import '../../../../../Core/root_manager.dart';
 import '../../../../../Core/utiles/widgets/email_textfield.dart';
 import '../../../../../Core/utiles/widgets/password_textfield.dart';
 import '../../../../../Core/utiles/widgets/shadow.dart';
@@ -47,7 +48,10 @@ class MainContainer extends StatelessWidget {
               Align(
                 alignment: AlignmentDirectional.topEnd,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, Routes.forgotPasswordScreenRoute);
+                  },
                   child: const SubtitleTextWidget(
                     label: 'Forget password?',
                     textDecoration: TextDecoration.underline,

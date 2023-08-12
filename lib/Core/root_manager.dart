@@ -5,7 +5,9 @@ import 'package:salla_users/Features/profile/presentation/views/wish_list_screen
 
 import '../Features/auth/presentation/views/login_screen.dart';
 import '../Features/auth/presentation/views/register/register_screen.dart';
+import '../Features/auth/presentation/views/widgets/forget_pass.dart';
 import '../Features/home/presentation/views/product_details.dart';
+import '../Features/profile/presentation/views/orders_screen.dart';
 import '../Features/root_screens/presentaiton/views/root_screens.dart';
 
 class Routes {
@@ -23,6 +25,10 @@ class Routes {
 
   static const String registerRoute = "/RegisterScreen";
 
+  static const String ordersRoute = "/OrdersScreen";
+
+  static const String forgotPasswordScreenRoute = "/ForgotPasswordScreen";
+
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.productDetailsRoute:
@@ -37,6 +43,10 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      case Routes.ordersRoute:
+        return MaterialPageRoute(builder: (_) => const OrdersScreen());
+      case Routes.forgotPasswordScreenRoute:
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordScreen());
       default:
         return unDefinedRoute();
     }

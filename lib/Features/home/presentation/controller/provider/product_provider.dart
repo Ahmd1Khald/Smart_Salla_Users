@@ -20,8 +20,9 @@ class ProductProvider with ChangeNotifier {
     return ctgList;
   }
 
-  List<ProductModel> getSearchResultList({required String prodName}) {
-    List<ProductModel> searchList = _localProduct
+  List<ProductModel> getSearchResultList(
+      {required String prodName, required List<ProductModel> passedList}) {
+    List<ProductModel> searchList = passedList
         .where((element) =>
             element.productTitle.toUpperCase().contains(prodName.toUpperCase()))
         .toList();

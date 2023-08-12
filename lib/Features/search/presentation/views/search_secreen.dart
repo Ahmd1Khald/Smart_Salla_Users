@@ -39,12 +39,15 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   List<ProductModel> searchResultList = [];
+
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
-    List<ProductModel> ctgList = widget.categoryName != null
-        ? productProvider.getCategoryList(categoryName: widget.categoryName!)
-        : [];
+    String? passedCategory = widget.categoryName;
+
+    final List<ProductModel> productList = passedCategory == null
+        ? productProvider.getProduct
+        : productProvider.getCategoryList(categoryName: passedCategory);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -55,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? widget.categoryName!
                   : AppStrings.searchString,
               []),
-          body: ctgList.isEmpty && widget.categoryName != null
+          body: productList.isEmpty
               ? EmptyCartWidget(
                   title: AppStrings.whoopsCategoryString,
                   subTitle: AppStrings.categoryEmptyString,
@@ -86,8 +89,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                           onChanged: (value) {
                             setState(() {
-                              searchResultList = productProvider
-                                  .getSearchResultList(prodName: value);
+                              searchResultList =
+                                  productProvider.getSearchResultList(
+                                prodName: value,
+                                passedList: productList,
+                              );
                               print(searchResultList);
                               print('-----------');
                               print(value);
@@ -97,46 +103,41 @@ class _SearchScreenState extends State<SearchScreen> {
                             setState(() {
                               searchResultList =
                                   productProvider.getSearchResultList(
-                                      prodName: searchTextController.text);
+                                prodName: searchTextController.text,
+                                passedList: productList,
+                              );
                             });
                           },
                         ),
                         if (searchTextController.text.isNotEmpty &&
-                            searchResultList.isEmpty)
-                          const Center(
-                              child: Column(
+                            searchResultList.isEmpty) ...[
+                          const Column(
                             children: [
                               SizedBox(
-                                height: 20,
+                                height: 30,
                               ),
-                              TitlesTextWidget(
-                                label: 'No Product Found',
-                                fontSize: 35,
-                              ),
+                              Center(
+                                  child: TitlesTextWidget(
+                                label: "No results found",
+                                fontSize: 40,
+                              )),
                             ],
-                          )),
+                          )
+                        ],
                         DynamicHeightGridView(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           builder: (context, index) => Padding(
                             padding: const EdgeInsets.only(top: 10.0),
-                            child: ChangeNotifierProvider.value(
-                              value: productProvider.getProduct[index],
-                              child: ProductItem(
-                                productId: widget.categoryName != null
-                                    ? ctgList[index].productId
-                                    : searchResultList.isNotEmpty
-                                        ? searchResultList[index].productId
-                                        : productProvider
-                                            .getProduct[index].productId,
-                              ),
+                            child: ProductItem(
+                              productId: searchTextController.text.isNotEmpty
+                                  ? searchResultList[index].productId
+                                  : productList[index].productId,
                             ),
                           ),
-                          itemCount: widget.categoryName != null
-                              ? ctgList.length
-                              : searchResultList.isNotEmpty
-                                  ? searchResultList.length
-                                  : productProvider.getProduct.length,
+                          itemCount: searchTextController.text.isNotEmpty
+                              ? searchResultList.length
+                              : productList.length,
                           crossAxisCount: 2,
                         ),
                       ],

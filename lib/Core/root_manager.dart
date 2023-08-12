@@ -6,7 +6,6 @@ import 'package:salla_users/Features/profile/presentation/views/wish_list_screen
 import '../Features/auth/presentation/views/login_screen.dart';
 import '../Features/auth/presentation/views/register/register_screen.dart';
 import '../Features/auth/presentation/views/widgets/forget_pass.dart';
-import '../Features/home/presentation/views/product_details.dart';
 import '../Features/profile/presentation/views/orders_screen.dart';
 import '../Features/root_screens/presentaiton/views/root_screens.dart';
 
@@ -31,8 +30,8 @@ class Routes {
 
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.productDetailsRoute:
-        return MaterialPageRoute(builder: (_) => const ProductDetails());
+      // case Routes.productDetailsRoute:
+      //   return MaterialPageRoute(builder: (_) => const ProductDetails());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const RootScreens());
       case Routes.wishListRoute:

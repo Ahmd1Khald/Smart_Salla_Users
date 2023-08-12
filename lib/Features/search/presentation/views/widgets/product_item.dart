@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/product_image.dart';
+import '../../../../home/data/models/product_model.dart';
+import '../../../../home/presentation/controller/provider/product_provider.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({Key? key}) : super(key: key);
+  const ProductItem({Key? key, required this.model}) : super(key: key);
 
+  final ProductModel model;
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return Padding(
       padding: const EdgeInsets.only(
         top: 10.0,
       ),
       child: Column(
         children: [
-          const ProductImage(
+          ProductImage(
             borderR: 25,
-            image: 'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
+            image: model.productImage,
             size: 0.22,
           ),
           const SizedBox(
@@ -28,7 +33,7 @@ class ProductItem extends StatelessWidget {
             children: [
               Expanded(
                   child: TitlesTextWidget(
-                label: 'Title' * 10,
+                label: model.productTitle,
                 maxLines: 2,
               )),
               const HeartButtonWidget(),
@@ -39,9 +44,9 @@ class ProductItem extends StatelessWidget {
           ),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                   child: SubtitleTextWidget(
-                label: '166.5\$',
+                label: model.productPrice,
                 fontSize: 21,
               )),
               Material(

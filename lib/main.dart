@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
 
 import 'Core/root_manager.dart';
 import 'Core/utiles/constance/app_styles.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           //home: const RootScreens(),
           onGenerateRoute: Routes.getRoute,
-          initialRoute: Routes.loginRoute,
+          initialRoute: Routes.homeRoute,
         );
       }),
     );

@@ -55,7 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? widget.categoryName!
                   : AppStrings.searchString,
               []),
-          body: ctgList.isEmpty
+          body: ctgList.isEmpty && widget.categoryName != null
               ? EmptyCartWidget(
                   title: AppStrings.whoopsCategoryString,
                   subTitle: AppStrings.categoryEmptyString,

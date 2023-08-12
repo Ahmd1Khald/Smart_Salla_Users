@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 import 'package:salla_users/Core/utiles/widgets/empty_cart.dart';
 import 'package:salla_users/Features/home/data/models/product_model.dart';
 import 'package:salla_users/Features/search/presentation/views/widgets/product_item.dart';
@@ -39,6 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+  List<ProductModel> searchResultList = [];
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
@@ -84,32 +84,61 @@ class _SearchScreenState extends State<SearchScreen> {
                               ),
                             ),
                           ),
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            setState(() {
+                              searchResultList = productProvider
+                                  .getSearchResultList(prodName: value);
+                              print(searchResultList);
+                              print('-----------');
+                              print(value);
+                            });
+                          },
                           onSubmitted: (value) {
-                            log(searchTextController.text);
+                            setState(() {
+                              searchResultList =
+                                  productProvider.getSearchResultList(
+                                      prodName: searchTextController.text);
+                            });
                           },
                         ),
+                        if (searchTextController.text.isNotEmpty &&
+                            searchResultList.isEmpty)
+                          const Center(
+                              child: Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TitlesTextWidget(
+                                label: 'No Product Found',
+                                fontSize: 35,
+                              ),
+                            ],
+                          )),
                         DynamicHeightGridView(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           builder: (context, index) => Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: ChangeNotifierProvider.value(
-                              value: widget.categoryName != null
-                                  ? ctgList[index]
-                                  : productProvider.getProduct[index],
+                              value: productProvider.getProduct[index],
                               child: ProductItem(
-                                  productId: widget.categoryName != null
-                                      ? ctgList[index].productId
-                                      : productProvider
-                                          .getProduct[index].productId),
+                                productId: widget.categoryName != null
+                                    ? ctgList[index].productId
+                                    : searchResultList.isNotEmpty
+                                        ? searchResultList[index].productId
+                                        : productProvider
+                                            .getProduct[index].productId,
+                              ),
                             ),
                           ),
                           itemCount: widget.categoryName != null
                               ? ctgList.length
-                              : productProvider.getProduct.length,
+                              : searchResultList.isNotEmpty
+                                  ? searchResultList.length
+                                  : productProvider.getProduct.length,
                           crossAxisCount: 2,
-                        )
+                        ),
                       ],
                     ),
                   ),

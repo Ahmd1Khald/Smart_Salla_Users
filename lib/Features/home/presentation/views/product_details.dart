@@ -147,7 +147,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           children: [
                             const TitlesTextWidget(label: "About this item"),
                             SubtitleTextWidget(
-                                label: 'In${getCurrProduct.productCategory}')
+                                label: 'In ${getCurrProduct.productCategory}')
                           ],
                         ),
                         const SizedBox(
@@ -155,7 +155,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         SubtitleTextWidget(
                           label: getCurrProduct.productDescription,
-                          maxLines: 10,
+                          maxLines: 200,
                         ),
                       ],
                     ),

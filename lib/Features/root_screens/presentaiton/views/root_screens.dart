@@ -18,7 +18,9 @@ class _RootScreensState extends State<RootScreens> {
   int currentScreen = 0;
   List<Widget> screens = [
     const HomeScreen(),
-    const SearchScreen(),
+    const SearchScreen(
+      categoryName: null,
+    ),
     const CartScreen(),
     const ProfileScreen()
   ];

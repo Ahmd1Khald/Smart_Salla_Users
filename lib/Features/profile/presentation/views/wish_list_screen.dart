@@ -1,7 +1,6 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:salla_users/Features/home/presentation/views/product_details.dart';
 
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
@@ -60,28 +59,10 @@ class WishListScreen extends StatelessWidget {
                 child: DynamicHeightGridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  builder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChangeNotifierProvider.value(
-                              value: productProvider.getProduct[index],
-                              child: ProductDetails(
-                                model: productProvider.getProduct[index],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      child: ChangeNotifierProvider.value(
-                        value: productProvider.getProduct[index],
-                        child: ProductItem(
-                          model: productProvider.getProduct[index],
-                        ),
-                      ),
+                  builder: (context, index) => const Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: ProductItem(
+                      productId: '',
                     ),
                   ),
                   itemCount: 1,

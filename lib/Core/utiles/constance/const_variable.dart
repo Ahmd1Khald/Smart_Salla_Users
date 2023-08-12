@@ -18,7 +18,7 @@ class AppConst {
     CategoriesModel(image: AssetsImages.cosmetics, name: 'Cosmetics'),
     CategoriesModel(image: AssetsImages.shoes, name: 'Shoes'),
     CategoriesModel(image: AssetsImages.book, name: 'Books'),
-    CategoriesModel(image: AssetsImages.watch, name: 'Watch'),
+    CategoriesModel(image: AssetsImages.watch, name: 'Watches'),
     CategoriesModel(image: AssetsImages.pc, name: 'Laptops'),
     CategoriesModel(image: AssetsImages.fashion, name: 'Clothes'),
   ];

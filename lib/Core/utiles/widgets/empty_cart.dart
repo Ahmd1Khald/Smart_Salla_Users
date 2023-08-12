@@ -63,7 +63,9 @@ class EmptyCartWidget extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(17),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Text(
                 buttonText,
                 style: const TextStyle(fontSize: 22),

@@ -5,9 +5,11 @@ import 'package:salla_users/Features/home/presentation/views/widgets/banner_widg
 import 'package:salla_users/Features/home/presentation/views/widgets/home_categories_item.dart';
 import 'package:salla_users/Features/home/presentation/views/widgets/home_cosnt_title.dart';
 import 'package:salla_users/Features/home/presentation/views/widgets/latest_arrival_product.dart';
+import 'package:salla_users/Features/search/presentation/views/search_secreen.dart';
 
 import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/const_variable.dart';
+import '../../../../Core/utiles/widgets/push_widget.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -48,7 +50,13 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 builder: (context, index) => InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    pushTo(
+                      context: context,
+                      screen: SearchScreen(
+                          categoryName: AppConst.categoriesItems[index].name),
+                    );
+                  },
                   child: CategoryItem(model: AppConst.categoriesItems[index]),
                 ),
                 itemCount: AppConst.categoriesItems.length,

@@ -7,7 +7,6 @@ import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 import '../../../home/presentation/controller/provider/product_provider.dart';
-import '../../../home/presentation/views/product_details.dart';
 import '../../../search/presentation/views/widgets/product_item.dart';
 
 class ViewedRecentlyScreen extends StatelessWidget {
@@ -18,6 +17,7 @@ class ViewedRecentlyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
+    //productProvider.findProductId == null?isEmpty=true:isEmpty=false;
     return isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
@@ -60,28 +60,10 @@ class ViewedRecentlyScreen extends StatelessWidget {
                 child: DynamicHeightGridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  builder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChangeNotifierProvider.value(
-                              value: productProvider.getProduct[index],
-                              child: ProductDetails(
-                                model: productProvider.getProduct[index],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      child: ChangeNotifierProvider.value(
-                        value: productProvider.getProduct[index],
-                        child: ProductItem(
-                          model: productProvider.getProduct[index],
-                        ),
-                      ),
+                  builder: (context, index) => const Padding(
+                    padding: EdgeInsets.only(top: 10.0),
+                    child: ProductItem(
+                      productId: '',
                     ),
                   ),
                   itemCount: 1,

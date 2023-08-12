@@ -4,6 +4,22 @@ import 'package:uuid/uuid.dart';
 import '../../../data/models/product_model.dart';
 
 class ProductProvider with ChangeNotifier {
+  ProductModel? findProductId({required String proId}) {
+    if (_localProduct.where((element) => element.productId == proId).isEmpty) {
+      return null;
+    }
+    return _localProduct.firstWhere((element) => element.productId == proId);
+  }
+
+  List<ProductModel> getCategoryList({required String categoryName}) {
+    List<ProductModel> ctgList = _localProduct
+        .where((element) =>
+            element.productCategory.toUpperCase() == categoryName.toUpperCase())
+        .toList();
+
+    return ctgList;
+  }
+
   List<ProductModel> get getProduct {
     return _localProduct;
   }

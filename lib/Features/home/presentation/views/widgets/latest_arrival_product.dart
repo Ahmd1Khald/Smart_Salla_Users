@@ -5,6 +5,7 @@ import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart
 
 import '../../../../../Core/utiles/constance/const_variable.dart';
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
+import '../../../../cart/presentation/controller/provider/cart_provider.dart';
 import '../../../data/models/product_model.dart';
 
 class LastArrivalProduct extends StatelessWidget {
@@ -14,7 +15,7 @@ class LastArrivalProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final productModelProvider = Provider.of<ProductModel>(context);
 
-    //final cartProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -51,8 +52,16 @@ class LastArrivalProduct extends StatelessWidget {
                         width: 20,
                       ),
                       IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.shopping_cart_checkout)),
+                          onPressed: () {
+                            cartProvider.addProductToCart(
+                                productId: productModelProvider.productId);
+                          },
+                          icon: Icon(
+                            cartProvider.isProductInCart(
+                                    productID: productModelProvider.productId)
+                                ? Icons.check
+                                : Icons.add_shopping_cart_rounded,
+                          )),
                     ],
                   ),
                   SubtitleTextWidget(

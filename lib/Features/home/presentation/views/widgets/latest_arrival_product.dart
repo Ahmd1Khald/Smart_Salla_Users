@@ -45,7 +45,8 @@ class LastArrivalProduct extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const HeartButtonWidget(),
+                      HeartButtonWidget(
+                          productId: productModelProvider.productId),
                       const SizedBox(
                         width: 20,
                       ),

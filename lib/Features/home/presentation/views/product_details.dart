@@ -110,9 +110,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   splashColor: Colors.red,
                                   borderRadius: BorderRadius.circular(16.0),
                                   onTap: () {},
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(1.5),
-                                    child: HeartButtonWidget(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(1.5),
+                                    child: HeartButtonWidget(
+                                      productId: getCurrProduct.productId,
+                                    ),
                                   ),
                                 ),
                               ),

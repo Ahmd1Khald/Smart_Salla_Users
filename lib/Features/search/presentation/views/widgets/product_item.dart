@@ -59,7 +59,9 @@ class ProductItem extends StatelessWidget {
                         label: getCurrProduct.productTitle,
                         maxLines: 3,
                       )),
-                      const HeartButtonWidget(),
+                      HeartButtonWidget(
+                        productId: getCurrProduct.productId,
+                      ),
                     ],
                   ),
                   const SizedBox(

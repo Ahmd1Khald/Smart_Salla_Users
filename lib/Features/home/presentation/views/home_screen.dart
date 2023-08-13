@@ -1,5 +1,6 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/home/presentation/views/widgets/banner_widget.dart';
 import 'package:salla_users/Features/home/presentation/views/widgets/home_categories_item.dart';
@@ -7,16 +8,17 @@ import 'package:salla_users/Features/home/presentation/views/widgets/home_cosnt_
 import 'package:salla_users/Features/home/presentation/views/widgets/latest_arrival_product.dart';
 import 'package:salla_users/Features/search/presentation/views/search_secreen.dart';
 
-import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/const_variable.dart';
 import '../../../../Core/utiles/widgets/push_widget.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
+import '../controller/provider/product_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: shimmerAppBar(),
       body: SingleChildScrollView(
@@ -33,14 +35,9 @@ class HomeScreen extends StatelessWidget {
                 height: AppConst.size(context).height * 0.147,
                 child: ListView.builder(
                   itemCount: 10,
-                  itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.productDetailsRoute);
-                    },
-                    child: const LastArrivalProduct(
-                      image:
-                          'https://i.ibb.co/8r1Ny2n/20-Nike-Air-Force-1-07.png',
-                    ),
+                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                    value: productProvider.getProduct[index],
+                    child: const LastArrivalProduct(),
                   ),
                   scrollDirection: Axis.horizontal,
                 ),

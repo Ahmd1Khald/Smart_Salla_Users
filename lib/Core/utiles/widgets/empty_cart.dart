@@ -9,7 +9,8 @@ class EmptyCartWidget extends StatelessWidget {
       required this.subTitle,
       required this.body,
       required this.buttonText,
-      required this.image})
+      required this.image,
+      required this.function})
       : super(key: key);
 
   final String title;
@@ -17,6 +18,7 @@ class EmptyCartWidget extends StatelessWidget {
   final String body;
   final String buttonText;
   final String image;
+  final VoidCallback function;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -63,9 +65,7 @@ class EmptyCartWidget extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.all(17),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: function,
               child: Text(
                 buttonText,
                 style: const TextStyle(fontSize: 22),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
@@ -21,6 +22,9 @@ class OrdersScreen extends StatelessWidget {
               body: AppStrings.looksLikeOrderString,
               buttonText: AppStrings.shopNowString,
               image: AssetsImages.bagWish,
+              function: () {
+                Navigator.pushNamed(context, Routes.homeRoute);
+              },
             ),
           )
         : Scaffold(

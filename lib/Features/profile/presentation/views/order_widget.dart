@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
 import 'package:salla_users/Core/utiles/widgets/product_image.dart';
-import 'package:salla_users/Features/cart/presentation/views/widgets/product_name.dart';
-import 'package:salla_users/Features/cart/presentation/views/widgets/product_price.dart';
 
 class OrderWidget extends StatelessWidget {
   const OrderWidget({super.key});
@@ -32,7 +30,7 @@ class OrderWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const ProductName(),
+                        // const ProductName(),
                         IconButton(
                           onPressed: () {},
                           icon: const Icon(
@@ -48,7 +46,7 @@ class OrderWidget extends StatelessWidget {
                     const Row(
                       children: [
                         TitlesTextWidget(label: 'Price: '),
-                        ProductPrice(),
+                        //ProductPrice(),
                       ],
                     ),
                     const SizedBox(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:salla_users/Features/cart/presentation/controller/provider/cart_provider.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/cart_widget.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/checkout_bottom_sheet.dart';
 
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
@@ -10,11 +13,10 @@ import '../../../../Core/utiles/widgets/empty_cart.dart';
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
 
-  final bool isEmpty = false;
-
   @override
   Widget build(BuildContext context) {
-    return isEmpty
+    final cartProvider = Provider.of<CartProvider>(context);
+    return cartProvider.getCartItem.isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
               title: AppStrings.whoopsCartString,
@@ -22,6 +24,9 @@ class CartScreen extends StatelessWidget {
               body: AppStrings.looksLikeCartString,
               buttonText: AppStrings.shopNowString,
               image: AssetsImages.bagWish,
+              function: () {
+                Navigator.pushNamed(context, Routes.homeRoute);
+              },
             ),
           )
         : Scaffold(
@@ -39,8 +44,11 @@ class CartScreen extends StatelessWidget {
               title: AppStrings.shoppingBasketString,
             ),
             body: ListView.builder(
-              itemBuilder: (context, index) => const CartWidget(),
-              itemCount: 15,
+              itemBuilder: (context, index) => ChangeNotifierProvider.value(
+                value: cartProvider.getCartItem.values.toList()[index],
+                child: const CartWidget(),
+              ),
+              itemCount: cartProvider.getCartItem.length,
             ),
           );
   }

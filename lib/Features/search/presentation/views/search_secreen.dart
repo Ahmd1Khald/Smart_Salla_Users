@@ -6,6 +6,7 @@ import 'package:salla_users/Core/utiles/widgets/empty_cart.dart';
 import 'package:salla_users/Features/home/data/models/product_model.dart';
 import 'package:salla_users/Features/search/presentation/views/widgets/product_item.dart';
 
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
@@ -60,6 +61,9 @@ class _SearchScreenState extends State<SearchScreen> {
               []),
           body: productList.isEmpty
               ? EmptyCartWidget(
+                  function: () {
+                    Navigator.pushNamed(context, Routes.homeRoute);
+                  },
                   title: AppStrings.whoopsCategoryString,
                   subTitle: AppStrings.categoryEmptyString,
                   body: AppStrings.looksLikeCategoryString,

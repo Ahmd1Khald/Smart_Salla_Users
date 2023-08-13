@@ -2,6 +2,7 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
@@ -21,6 +22,9 @@ class ViewedRecentlyScreen extends StatelessWidget {
     return isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
+              function: () {
+                Navigator.pushNamed(context, Routes.homeRoute);
+              },
               title: AppStrings.whoopsViewedRecentlyString,
               subTitle: AppStrings.wishListEmptyString,
               body: AppStrings.looksLikeViewedRecentlyString,

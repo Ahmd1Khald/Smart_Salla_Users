@@ -41,13 +41,13 @@ class CartScreen extends StatelessWidget {
                         context: context,
                         builder: (context) => AlertWidget(
                               title: 'Remove all cart ?',
-                              subTitle1: 'Yes',
-                              subTitle2: 'No',
+                              subTitle1: 'Cancel',
+                              subTitle2: 'Yes',
                               func1: () {
-                                cartProvider.clearCartItems();
                                 Navigator.pop(context);
                               },
                               func2: () {
+                                cartProvider.clearCartItems();
                                 Navigator.pop(context);
                               },
                             ));
@@ -55,6 +55,7 @@ class CartScreen extends StatelessWidget {
                   icon: const Icon(
                     Icons.delete_forever_rounded,
                     color: Colors.red,
+                    size: 28,
                   ),
                 )
               ],

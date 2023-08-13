@@ -5,10 +5,11 @@ import 'package:provider/provider.dart';
 import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
+import '../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
-import '../../../home/presentation/controller/provider/product_provider.dart';
 import '../../../search/presentation/views/widgets/product_item.dart';
+import '../controller/provider/wish_list_provider.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({Key? key}) : super(key: key);
@@ -17,8 +18,8 @@ class WishListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
-    return isEmpty
+    final wishListProvider = Provider.of<WishListProvider>(context);
+    return wishListProvider.getWishList.isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
               function: () {
@@ -34,28 +35,34 @@ class WishListScreen extends StatelessWidget {
         : Scaffold(
             appBar: customAppBar(
               [
-                Material(
-                  borderRadius: BorderRadius.circular(16.0),
-                  color: Colors.lightBlue,
-                  child: InkWell(
-                    splashColor: Colors.red,
-                    borderRadius: BorderRadius.circular(16.0),
-                    onTap: () {},
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.delete_forever_rounded,
-                        color: Colors.black,
-                        size: 26,
-                      ),
-                    ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertWidget(
+                              title: 'Remove all wish list ?',
+                              subTitle1: 'Cancel',
+                              subTitle2: 'Yes',
+                              func1: () {
+                                Navigator.pop(context);
+                              },
+                              func2: () {
+                                wishListProvider.clearWishListItems();
+                                Navigator.pop(context);
+                              },
+                            ));
+                  },
+                  icon: const Icon(
+                    Icons.delete_forever_rounded,
+                    color: Colors.red,
+                    size: 28,
                   ),
                 ),
                 const SizedBox(
                   width: 8,
                 ),
               ],
-              title: 'Wishlist (1)',
+              title: 'Wishlist (${wishListProvider.getWishList.length})',
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -63,13 +70,15 @@ class WishListScreen extends StatelessWidget {
                 child: DynamicHeightGridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  builder: (context, index) => const Padding(
-                    padding: EdgeInsets.only(top: 10.0),
+                  builder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: ProductItem(
-                      productId: '',
+                      productId: wishListProvider.getWishList.values
+                          .toList()[index]
+                          .productId,
                     ),
                   ),
-                  itemCount: 1,
+                  itemCount: wishListProvider.getWishList.length,
                   crossAxisCount: 2,
                 ),
               ),

@@ -7,6 +7,7 @@ import 'package:salla_users/Features/home/presentation/controller/provider/produ
 import 'Core/root_manager.dart';
 import 'Core/utiles/constance/app_styles.dart';
 import 'Features/cart/presentation/controller/provider/cart_provider.dart';
+import 'Features/profile/presentation/controller/provider/viewed_recently_provider.dart';
 import 'Features/profile/presentation/controller/provider/wish_list_provider.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => WishListProvider()),
+        ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(

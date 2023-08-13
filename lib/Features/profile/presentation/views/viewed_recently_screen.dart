@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
+import '../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 import '../../../home/presentation/controller/provider/product_provider.dart';
 import '../../../search/presentation/views/widgets/product_item.dart';
+import '../controller/provider/viewed_recently_provider.dart';
 
 class ViewedRecentlyScreen extends StatelessWidget {
   const ViewedRecentlyScreen({Key? key}) : super(key: key);
@@ -18,8 +20,8 @@ class ViewedRecentlyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
-    //productProvider.findProductId == null?isEmpty=true:isEmpty=false;
-    return isEmpty
+    final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
+    return viewedRecentlyProvider.getViewedRecently.isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
               function: () {
@@ -41,7 +43,23 @@ class ViewedRecentlyScreen extends StatelessWidget {
                   child: InkWell(
                     splashColor: Colors.red,
                     borderRadius: BorderRadius.circular(16.0),
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertWidget(
+                                title: 'Remove all wish list ?',
+                                subTitle1: 'Cancel',
+                                subTitle2: 'Yes',
+                                func1: () {
+                                  Navigator.pop(context);
+                                },
+                                func2: () {
+                                  viewedRecentlyProvider
+                                      .clearViewedRecentlyItems();
+                                  Navigator.pop(context);
+                                },
+                              ));
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Icon(
@@ -56,7 +74,8 @@ class ViewedRecentlyScreen extends StatelessWidget {
                   width: 8,
                 ),
               ],
-              title: 'Viewed Recently (1)',
+              title:
+                  'Viewed Recently (${viewedRecentlyProvider.getViewedRecently.length})',
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -64,13 +83,15 @@ class ViewedRecentlyScreen extends StatelessWidget {
                 child: DynamicHeightGridView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  builder: (context, index) => const Padding(
-                    padding: EdgeInsets.only(top: 10.0),
+                  builder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: ProductItem(
-                      productId: '',
+                      productId: viewedRecentlyProvider.getViewedRecently.values
+                          .toList()[index]
+                          .productId,
                     ),
                   ),
-                  itemCount: 1,
+                  itemCount: viewedRecentlyProvider.getViewedRecently.length,
                   crossAxisCount: 2,
                 ),
               ),

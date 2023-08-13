@@ -9,6 +9,7 @@ import 'package:salla_users/Features/home/presentation/views/product_details.dar
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/product_image.dart';
 import '../../../../cart/presentation/controller/provider/cart_provider.dart';
+import '../../../../profile/presentation/controller/provider/viewed_recently_provider.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
@@ -26,11 +27,15 @@ class ProductItem extends StatelessWidget {
     final productProvider = Provider.of<ProductProvider>(context);
     final getCurrProduct = productProvider.findProductId(proId: productId);
     final cartProvider = Provider.of<CartProvider>(context);
+    final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
 
     return getCurrProduct == null
         ? const SizedBox.shrink()
         : InkWell(
             onTap: () {
+              viewedRecentlyProvider.addProductToViewedRecently(
+                productId: getCurrProduct.productId,
+              );
               pushTo(
                 context: context,
                 screen: ProductDetails(

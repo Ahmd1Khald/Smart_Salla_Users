@@ -10,6 +10,7 @@ import 'package:salla_users/Features/cart/presentation/views/widgets/quantity_bo
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../../Core/utiles/widgets/quantity_outlined_button_style.dart';
 import '../../../../home/presentation/controller/provider/product_provider.dart';
+import '../../controller/provider/cart_provider.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({super.key});
@@ -18,6 +19,7 @@ class CartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartModelProvider = Provider.of<CartModel>(context);
     final productProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     final getCurrProduct =
         productProvider.findProductId(proId: cartModelProvider.productId);
 
@@ -50,7 +52,10 @@ class CartWidget extends StatelessWidget {
                               Column(
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      cartProvider.removeOneItem(
+                                          productId: getCurrProduct.productId);
+                                    },
                                     icon: const Icon(
                                       Icons.clear,
                                       color: Colors.red,
@@ -80,8 +85,8 @@ class CartWidget extends StatelessWidget {
                                       topRight: Radius.circular(16),
                                     )),
                                     context: context,
-                                    builder: (context) =>
-                                        const QuantityBottomSheet(),
+                                    builder: (context) => QuantityBottomSheet(
+                                        model: cartModelProvider),
                                   );
                                 },
                                 icon: const Icon(IconlyLight.arrowDown2),

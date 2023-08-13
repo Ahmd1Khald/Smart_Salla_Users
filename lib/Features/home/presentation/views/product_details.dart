@@ -6,6 +6,7 @@ import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
 import '../../../../Core/utiles/widgets/app_name.dart';
 import '../../../../Core/utiles/widgets/custom_heart_botton.dart';
+import '../../../cart/presentation/controller/provider/cart_provider.dart';
 import '../controller/provider/product_provider.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -30,6 +31,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     final getCurrProduct =
         productProvider.findProductId(proId: widget.productId);
+
+    final cartProvider = Provider.of<CartProvider>(context);
 
     print(widget.productId);
     print('+++++++++++++++');
@@ -128,10 +131,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.add_shopping_cart),
-                                    label: const Text(
-                                      "Add to cart",
+                                    onPressed: () {
+                                      cartProvider.addProductToCart(
+                                          productId: getCurrProduct.productId);
+                                    },
+                                    icon: Icon(cartProvider.isProductInCart(
+                                            productID: getCurrProduct.productId)
+                                        ? Icons.check
+                                        : Icons.add_shopping_cart_rounded),
+                                    label: Text(
+                                      cartProvider.isProductInCart(
+                                              productID:
+                                                  getCurrProduct.productId)
+                                          ? "Added"
+                                          : "Add to cart",
                                     ),
                                   ),
                                 ),

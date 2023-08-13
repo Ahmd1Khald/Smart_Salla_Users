@@ -71,7 +71,7 @@ class _RootScreensState extends State<RootScreens> {
             selectedIcon: const Icon(IconlyBold.bag),
             icon: Badge(
               label: SubtitleTextWidget(
-                label: cartProvider.getCartItem.length.toString(),
+                label: cartProvider.getCart.length.toString(),
                 fontSize: 11,
               ),
               child: const Icon(IconlyLight.bag),

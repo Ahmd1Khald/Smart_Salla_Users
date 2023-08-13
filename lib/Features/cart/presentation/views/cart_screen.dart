@@ -7,6 +7,7 @@ import 'package:salla_users/Features/cart/presentation/views/widgets/checkout_bo
 import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
+import '../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 
@@ -16,7 +17,8 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
-    return cartProvider.getCartItem.isEmpty
+    //final cartModelProvider = Provider.of<CartModel>(context);
+    return cartProvider.getCart.isEmpty
         ? Scaffold(
             body: EmptyCartWidget(
               title: AppStrings.whoopsCartString,
@@ -34,7 +36,22 @@ class CartScreen extends StatelessWidget {
             appBar: customAppBar(
               [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertWidget(
+                              title: 'Remove all cart ?',
+                              subTitle1: 'Yes',
+                              subTitle2: 'No',
+                              func1: () {
+                                cartProvider.clearCartItems();
+                                Navigator.pop(context);
+                              },
+                              func2: () {
+                                Navigator.pop(context);
+                              },
+                            ));
+                  },
                   icon: const Icon(
                     Icons.delete_forever_rounded,
                     color: Colors.red,
@@ -43,12 +60,25 @@ class CartScreen extends StatelessWidget {
               ],
               title: AppStrings.shoppingBasketString,
             ),
-            body: ListView.builder(
-              itemBuilder: (context, index) => ChangeNotifierProvider.value(
-                value: cartProvider.getCartItem.values.toList()[index],
-                child: const CartWidget(),
-              ),
-              itemCount: cartProvider.getCartItem.length,
+            body: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) =>
+                        ChangeNotifierProvider.value(
+                      value: cartProvider.getCart.values
+                          .toList()
+                          .reversed
+                          .toList()[index],
+                      child: const CartWidget(),
+                    ),
+                    itemCount: cartProvider.getCart.length,
+                  ),
+                ),
+                const SizedBox(
+                  height: kBottomNavigationBarHeight + 10,
+                )
+              ],
             ),
           );
   }

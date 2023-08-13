@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
+
+import '../../controller/provider/cart_provider.dart';
 
 class CartBottomSheet extends StatelessWidget {
-  const CartBottomSheet({Key? key}) : super(key: key);
+  const CartBottomSheet({
+    Key? key,
+    /*required this.model*/
+  }) : super(key: key);
 
+  //final CartModel model;
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
@@ -17,13 +27,16 @@ class CartBottomSheet extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Flexible(
+            Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TitlesTextWidget(label: 'Total (6 product/6 items)'),
+                  TitlesTextWidget(
+                      label:
+                          'Total (${cartProvider.getCart.length} product/${cartProvider.getCartItems()} items)'),
                   SubtitleTextWidget(
-                    label: '16.99\$',
+                    label:
+                        '${cartProvider.getTotal(productProvider: productProvider)}\$',
                     color: Colors.blue,
                     fontSize: 17,
                     fontWeight: FontWeight.w500,

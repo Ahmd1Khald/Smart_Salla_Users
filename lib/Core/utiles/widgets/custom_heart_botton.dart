@@ -7,7 +7,7 @@ class HeartButtonWidget extends StatefulWidget {
   const HeartButtonWidget({
     super.key,
     this.size = 22,
-    this.color = Colors.transparent,
+    this.color = Colors.grey,
     required this.productId,
   });
 
@@ -24,9 +24,9 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
   Widget build(BuildContext context) {
     final wishListProvider = Provider.of<WishListProvider>(context);
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: widget.color,
+        color: Colors.transparent,
       ),
       child: IconButton(
         style: IconButton.styleFrom(
@@ -45,7 +45,7 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
           color:
               wishListProvider.isProductInWishList(productID: widget.productId)
                   ? Colors.red
-                  : Colors.grey,
+                  : widget.color,
         ),
       ),
     );

@@ -114,6 +114,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     padding: const EdgeInsets.all(1.5),
                                     child: HeartButtonWidget(
                                       productId: getCurrProduct.productId,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),

@@ -2,10 +2,13 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
+import 'package:salla_users/Core/utiles/widgets/push_widget.dart';
+import 'package:salla_users/Features/home/presentation/views/product_details.dart';
 
 import '../../../../../Core/utiles/constance/const_variable.dart';
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../cart/presentation/controller/provider/cart_provider.dart';
+import '../../../../profile/presentation/controller/provider/viewed_recently_provider.dart';
 import '../../../data/models/product_model.dart';
 
 class LastArrivalProduct extends StatelessWidget {
@@ -14,66 +17,76 @@ class LastArrivalProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productModelProvider = Provider.of<ProductModel>(context);
+    final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
 
     final cartProvider = Provider.of<CartProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: FancyShimmerImage(
-                  imageUrl: productModelProvider.productImage,
-                  width: AppConst.size(context).width * 0.2,
-                  height: AppConst.size(context).height * 0.12,
+    return InkWell(
+      onTap: () {
+        viewedRecentlyProvider.addProductToViewedRecently(
+            productId: productModelProvider.productId);
+        pushTo(
+            context: context,
+            screen: ProductDetails(productId: productModelProvider.productId));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: FancyShimmerImage(
+                    imageUrl: productModelProvider.productImage,
+                    width: AppConst.size(context).width * 0.2,
+                    height: AppConst.size(context).height * 0.12,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Column(
-                children: [
-                  SizedBox(
-                    width: AppConst.size(context).width * 0.26,
-                    child: SubtitleTextWidget(
-                      label: productModelProvider.productTitle,
-                      maxLines: 2,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      HeartButtonWidget(
-                          productId: productModelProvider.productId),
-                      const SizedBox(
-                        width: 20,
+                const SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      width: AppConst.size(context).width * 0.26,
+                      child: SubtitleTextWidget(
+                        label: productModelProvider.productTitle,
+                        maxLines: 2,
                       ),
-                      IconButton(
-                          onPressed: () {
-                            cartProvider.addProductToCart(
-                                productId: productModelProvider.productId);
-                          },
-                          icon: Icon(
-                            cartProvider.isProductInCart(
-                                    productID: productModelProvider.productId)
-                                ? Icons.check
-                                : Icons.add_shopping_cart_rounded,
-                          )),
-                    ],
-                  ),
-                  SubtitleTextWidget(
-                    label: '${productModelProvider.productPrice}\$',
-                    color: Colors.blue,
-                    maxLines: 1,
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
+                    ),
+                    Row(
+                      children: [
+                        HeartButtonWidget(
+                            productId: productModelProvider.productId),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              cartProvider.addProductToCart(
+                                  productId: productModelProvider.productId);
+                            },
+                            icon: Icon(
+                              cartProvider.isProductInCart(
+                                      productID: productModelProvider.productId)
+                                  ? Icons.check
+                                  : Icons.add_shopping_cart_rounded,
+                            )),
+                      ],
+                    ),
+                    SubtitleTextWidget(
+                      label: '${productModelProvider.productPrice}\$',
+                      color: Colors.blue,
+                      maxLines: 1,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "654984880372",
+    "project_id": "smart-sallah-users",
+    "storage_bucket": "smart-sallah-users.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654984880372:android:8e6ea5940f031e27a1fea1",
+        "android_client_info": {
+          "package_name": "com.example.salla_users"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654984880372-bgtjnaoah5i8nbep5hc9vug6cj4m3p3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGrS5cFbghXDzxPYHB_-u5jm5At40oT5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654984880372-bgtjnaoah5i8nbep5hc9vug6cj4m3p3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

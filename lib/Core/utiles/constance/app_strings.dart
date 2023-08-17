@@ -1,5 +1,5 @@
 class AppStrings {
-  static const appName = 'Salla Users';
+  static const appName = 'Smart Salla Users';
   static const noRoute = 'No page found';
   static const profileScreen = 'Profile Screen';
   static const pleaseString = "Please login to have ultimate access";

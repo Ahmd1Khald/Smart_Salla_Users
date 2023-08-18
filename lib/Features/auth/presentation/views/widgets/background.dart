@@ -56,7 +56,7 @@ class BaskGroundWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.04,
+                height: MediaQuery.of(context).size.height * 0.02,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:salla_users/Core/utiles/constance/const_variable.dart';
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/register_button.dart';
@@ -9,6 +11,7 @@ import 'package:salla_users/Features/auth/presentation/views/register/widgets/si
 
 import '../../../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../../../Core/utiles/widgets/email_textfield.dart';
+import '../../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../../../Core/utiles/widgets/password_textfield.dart';
 import '../../../../../../Core/utiles/widgets/pick_image_widget.dart';
 import 'name_textfield.dart';
@@ -27,6 +30,9 @@ class RegisterBody extends StatefulWidget {
 }
 
 class _RegisterBodyState extends State<RegisterBody> {
+  bool isLoading = false;
+  final auth = FirebaseAuth.instance;
+
   @override
   void dispose() {
     widget.nameController.dispose();
@@ -119,7 +125,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                   passController2: widget.passController,
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 60,
                 ),
                 Center(
                   child: RegisterButton(
@@ -143,17 +149,47 @@ class _RegisterBodyState extends State<RegisterBody> {
                                 );
                               });
                         } else {
-                          print(widget.nameController.text);
-                          print(widget.emailController.text);
-                          print(widget.passController.text);
-                          print(widget.repeatPassController.text);
+                          try {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            auth
+                                .createUserWithEmailAndPassword(
+                              email: widget.emailController.text.trim(),
+                              password: widget.passController.text.trim(),
+                            )
+                                .then((value) {
+                              Fluttertoast.showToast(
+                                msg: "The account has been created",
+                                toastLength: Toast.LENGTH_SHORT,
+                                textColor: Colors.white,
+                              );
+                            });
+                          } on FirebaseException catch (error) {
+                            MyAppMethods.showErrorORWarningDialog(
+                              context: context,
+                              subtitle:
+                                  "An error has been occured ${error.message}",
+                              fct: () {
+                                //Navigator.pop(context);
+                              },
+                            );
+                          } finally {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          }
+                          print(widget.nameController.text.trim());
+                          print(widget.emailController.text.trim());
+                          print(widget.passController.text.trim());
+                          print(widget.repeatPassController.text.trim());
                         }
                       }
                     },
                   ),
                 ),
                 const SizedBox(
-                  height: 90,
+                  height: 150,
                 ),
                 SignInWidget(
                   function: () {

@@ -13,12 +13,12 @@ class LoginScreen extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: const SingleChildScrollView(
+        body: SingleChildScrollView(
           child: SafeArea(
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                BaskGroundWidget(),
+                const BaskGroundWidget(),
                 MainContainer(),
               ],
             ),

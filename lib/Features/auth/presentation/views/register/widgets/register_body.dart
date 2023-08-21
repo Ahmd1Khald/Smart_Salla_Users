@@ -9,7 +9,7 @@ import 'package:salla_users/Features/auth/presentation/views/register/widgets/re
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/show_alert_picker.dart';
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/sign_up.dart';
 
-import '../../../../../../Core/utiles/widgets/alert_widget.dart';
+import '../../../../../../Core/root_manager.dart';
 import '../../../../../../Core/utiles/widgets/email_textfield.dart';
 import '../../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../../../Core/utiles/widgets/password_textfield.dart';
@@ -129,50 +129,47 @@ class _RegisterBodyState extends State<RegisterBody> {
                 ),
                 Center(
                   child: RegisterButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (widget.formKey.currentState!.validate()) {
                         if (widget.pickedImage == null) {
                           print('+++++++++++++++++++++++++');
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertWidget(
-                                  func1: () {
-                                    Navigator.pop(context);
-                                  },
-                                  func2: () {
-                                    Navigator.pop(context);
-                                  },
-                                  subTitle1: 'Cancel',
-                                  subTitle2: 'Ok',
-                                  title: 'Make sure to pick up an image',
-                                );
-                              });
+                          MyAppMethods.showErrorORWarningDialog(
+                            context: context,
+                            subtitle: "Make sure to pick up an image",
+                            fct: () {
+                              //Navigator.pop(context);
+                            },
+                          );
                         } else {
                           try {
                             setState(() {
                               isLoading = true;
                             });
-                            auth
+                            MyAppMethods.loadingPage(context: context);
+                            await auth
                                 .createUserWithEmailAndPassword(
-                              email: widget.emailController.text.trim(),
-                              password: widget.passController.text.trim(),
-                            )
-                                .then((value) {
-                              Fluttertoast.showToast(
-                                msg: "The account has been created",
-                                toastLength: Toast.LENGTH_SHORT,
-                                textColor: Colors.white,
-                              );
-                            });
-                          } on FirebaseException catch (error) {
-                            MyAppMethods.showErrorORWarningDialog(
+                                  email: widget.emailController.text.trim(),
+                                  password: widget.passController.text.trim(),
+                                )
+                                .then((value) => Navigator.pushNamed(
+                                    context, Routes.homeRoute));
+                            Fluttertoast.showToast(
+                              msg: "An account has been created",
+                              toastLength: Toast.LENGTH_SHORT,
+                              textColor: Colors.white,
+                            );
+                          } on FirebaseAuthException catch (error) {
+                            await MyAppMethods.showErrorORWarningDialog(
                               context: context,
                               subtitle:
                                   "An error has been occured ${error.message}",
-                              fct: () {
-                                //Navigator.pop(context);
-                              },
+                              fct: () {},
+                            );
+                          } catch (error) {
+                            await MyAppMethods.showErrorORWarningDialog(
+                              context: context,
+                              subtitle: "An error has been occured $error",
+                              fct: () {},
                             );
                           } finally {
                             setState(() {

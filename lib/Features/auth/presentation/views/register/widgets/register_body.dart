@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,6 +11,7 @@ import 'package:salla_users/Features/auth/presentation/views/register/widgets/sh
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/sign_up.dart';
 
 import '../../../../../../Core/root_manager.dart';
+import '../../../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../../../Core/utiles/widgets/email_textfield.dart';
 import '../../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../../../Core/utiles/widgets/password_textfield.dart';
@@ -30,7 +32,7 @@ class RegisterBody extends StatefulWidget {
 }
 
 class _RegisterBodyState extends State<RegisterBody> {
-  bool isLoading = false;
+  //bool isLoading = false;
   final auth = FirebaseAuth.instance;
 
   @override
@@ -142,16 +144,14 @@ class _RegisterBodyState extends State<RegisterBody> {
                           );
                         } else {
                           try {
-                            setState(() {
-                              isLoading = true;
-                            });
                             MyAppMethods.loadingPage(context: context);
-                            await auth
-                                .createUserWithEmailAndPassword(
-                                  email: widget.emailController.text.trim(),
-                                  password: widget.passController.text.trim(),
-                                )
-                                .then((value) => Navigator.pushReplacementNamed(
+                            await auth.createUserWithEmailAndPassword(
+                              email: widget.emailController.text.trim(),
+                              password: widget.passController.text.trim(),
+                            );
+
+                            await addDataToFirestore().then((value) =>
+                                Navigator.pushReplacementNamed(
                                     context, Routes.homeRoute));
                             Fluttertoast.showToast(
                               msg: "An account has been created",
@@ -163,18 +163,18 @@ class _RegisterBodyState extends State<RegisterBody> {
                               context: context,
                               subtitle:
                                   "An error has been occured ${error.message}",
-                              fct: () {},
+                              fct: () {
+                                Navigator.pop(context);
+                              },
                             );
                           } catch (error) {
                             await MyAppMethods.showErrorORWarningDialog(
                               context: context,
                               subtitle: "An error has been occured $error",
-                              fct: () {},
+                              fct: () {
+                                Navigator.pop(context);
+                              },
                             );
-                          } finally {
-                            setState(() {
-                              isLoading = false;
-                            });
                           }
                           print(widget.nameController.text.trim());
                           print(widget.emailController.text.trim());
@@ -199,5 +199,21 @@ class _RegisterBodyState extends State<RegisterBody> {
         ),
       ),
     );
+  }
+
+  Future<void> addDataToFirestore() async {
+    User? user = auth.currentUser;
+    await FirebaseFirestore.instance
+        .collection(AppStrings.userCollection)
+        .doc(user!.uid)
+        .set({
+      'userId': user.uid,
+      'userName': widget.nameController.text,
+      'userImage': "",
+      'userEmail': widget.emailController.text.toLowerCase(),
+      'createdAt': Timestamp.now(),
+      'userCart': [],
+      'userWishlist': [],
+    });
   }
 }

@@ -87,8 +87,8 @@ class _MainContainerState extends State<MainContainer> {
                             email: widget.emailController.text.trim(),
                             password: widget.passController.text.trim(),
                           )
-                          .then((value) =>
-                              Navigator.pushNamed(context, Routes.homeRoute));
+                          .then((value) => Navigator.pushReplacementNamed(
+                              context, Routes.homeRoute));
                       Fluttertoast.showToast(
                         msg: "Login Success!",
                         toastLength: Toast.LENGTH_SHORT,
@@ -98,13 +98,17 @@ class _MainContainerState extends State<MainContainer> {
                       await MyAppMethods.showErrorORWarningDialog(
                         context: context,
                         subtitle: "An error has been occured ${error.message}",
-                        fct: () {},
+                        fct: () {
+                          Navigator.pop(context);
+                        },
                       );
                     } catch (error) {
                       await MyAppMethods.showErrorORWarningDialog(
                         context: context,
                         subtitle: "An error has been occured $error",
-                        fct: () {},
+                        fct: () {
+                          Navigator.pop(context);
+                        },
                       );
                     } finally {
                       setState(() {

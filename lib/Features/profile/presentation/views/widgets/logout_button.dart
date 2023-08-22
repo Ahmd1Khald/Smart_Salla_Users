@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
 class LogOutButton extends StatelessWidget {
-  const LogOutButton({Key? key, required this.function}) : super(key: key);
+  const LogOutButton({
+    Key? key,
+    required this.function,
+    required this.title,
+    required this.icon,
+  }) : super(key: key);
 
   final VoidCallback function;
+  final String title;
+  final IconData icon;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -17,9 +24,9 @@ class LogOutButton extends StatelessWidget {
           ),
         ),
         onPressed: function,
-        icon: const Icon(Icons.login),
-        label: const Text(
-          "Login",
+        icon: Icon(icon),
+        label: Text(
+          title,
         ),
       ),
     );

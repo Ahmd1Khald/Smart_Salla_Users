@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/custom_listtile.dart';
@@ -11,10 +12,18 @@ import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
 import '../../../../Core/utiles/widgets/alert_widget.dart';
+import '../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +150,15 @@ class ProfileScreen extends StatelessWidget {
                         func1: () {
                           Navigator.pop(context);
                         },
-                        func2: () {},
+                        func2: () async {
+                          MyAppMethods.loadingPage(context: context);
+                          await FirebaseAuth.instance.signOut().then((value) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.loginRoute,
+                            );
+                          });
+                        },
                         title: 'Are you sure ?',
                         subTitle1: 'NO',
                         subTitle2: 'YES',
@@ -149,6 +166,8 @@ class ProfileScreen extends StatelessWidget {
                     },
                   );
                 },
+                title: user == null ? 'Login' : 'Logout',
+                icon: user == null ? Icons.login : Icons.logout,
               )
             ],
           ),

@@ -151,7 +151,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                                   email: widget.emailController.text.trim(),
                                   password: widget.passController.text.trim(),
                                 )
-                                .then((value) => Navigator.pushNamed(
+                                .then((value) => Navigator.pushReplacementNamed(
                                     context, Routes.homeRoute));
                             Fluttertoast.showToast(
                               msg: "An account has been created",

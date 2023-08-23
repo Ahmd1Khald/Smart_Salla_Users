@@ -9,6 +9,7 @@ import 'package:salla_users/firebase_options.dart';
 import 'Core/root_manager.dart';
 import 'Core/utiles/constance/app_styles.dart';
 import 'Features/cart/presentation/controller/provider/cart_provider.dart';
+import 'Features/home/presentation/controller/provider/user_provider.dart';
 import 'Features/profile/presentation/controller/provider/viewed_recently_provider.dart';
 import 'Features/profile/presentation/controller/provider/wish_list_provider.dart';
 
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => CartProvider()),
             ChangeNotifierProvider(create: (_) => WishListProvider()),
             ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
+            ChangeNotifierProvider(create: (_) => UserProvider()),
           ],
           child:
               Consumer<ThemeProvider>(builder: (context, themeProvider, child) {

@@ -2,6 +2,8 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Features/home/data/models/user_model.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/user_provider.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/custom_listtile.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/logout_button.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/please_text.dart';
@@ -24,6 +26,36 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
+
+  Future<void> fetchUserInfo() async {
+    if (user == null) {
+      //Navigator.pop(context);
+      return;
+    }
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      //MyAppMethods.loadingPage(context: context);
+      userModel = await userProvider.fetchUserData();
+      setState(() {});
+      print(userModel?.userEmail ?? 'no data');
+      print('++++++++++++++++++++++');
+    } catch (error) {
+      await MyAppMethods.showErrorORWarningDialog(
+          context: context,
+          subtitle: 'Error occured $error',
+          fct: () {
+            //Navigator.pop(context);
+          });
+    }
+  }
+
+  @override
+  void initState() {
+    //MyAppMethods.loadingPage(context: context);
+    fetchUserInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,48 +66,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Visibility(
-                visible: true,
-                child: PleaseText(),
+              Visibility(
+                visible: user == null ? true : false,
+                child: const PleaseText(),
               ),
               const SizedBox(
                 height: 20,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).cardColor,
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.background,
-                            width: 3),
+              user != null
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context).cardColor,
+                              border: Border.all(
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  width: 3),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: FancyShimmerImage(
+                                imageUrl:
+                                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 7,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TitlesTextWidget(
+                                  label: userModel?.userName ?? 'No name'),
+                              SubtitleTextWidget(
+                                  label: userModel?.userEmail ?? 'No email'),
+                            ],
+                          ),
+                        ],
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
-                        child: FancyShimmerImage(
-                          imageUrl:
-                              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 7,
-                    ),
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TitlesTextWidget(label: "Ahmed"),
-                        SubtitleTextWidget(label: "Ahmed@gmail.com"),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+                    )
+                  : const SizedBox.shrink(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12.0,

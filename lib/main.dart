@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 import 'package:salla_users/firebase_options.dart';
 
 import 'Core/root_manager.dart';
@@ -71,7 +72,8 @@ class MyApp extends StatelessWidget {
               ),
               //home: const RootScreens(),
               onGenerateRoute: Routes.getRoute,
-              initialRoute: Routes.loginRoute,
+              //initialRoute: Routes.loginRoute,
+              home: const RootScreens(),
             );
           }),
         );

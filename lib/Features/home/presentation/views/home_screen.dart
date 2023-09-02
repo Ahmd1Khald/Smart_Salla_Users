@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: AppConst.size(context).height * 0.147,
                 child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: 5,
                   itemBuilder: (context, index) => ChangeNotifierProvider.value(
                     value: productProvider.getProduct[index],
                     child: const LastArrivalProduct(),

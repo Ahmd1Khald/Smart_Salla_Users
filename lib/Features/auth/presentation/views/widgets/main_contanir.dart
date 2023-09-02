@@ -72,7 +72,7 @@ class _MainContainerState extends State<MainContainer> {
                 ),
               ),
               const SizedBox(
-                height: 25,
+                height: 20,
               ),
               LoginButton(
                 onPressed: () async {

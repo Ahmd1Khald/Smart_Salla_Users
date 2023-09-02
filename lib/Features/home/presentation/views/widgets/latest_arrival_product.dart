@@ -20,28 +20,31 @@ class LastArrivalProduct extends StatelessWidget {
     final viewedRecentlyProvider = Provider.of<ViewedRecentlyProvider>(context);
 
     final cartProvider = Provider.of<CartProvider>(context);
-    return InkWell(
-      onTap: () {
-        viewedRecentlyProvider.addProductToViewedRecently(
-            productId: productModelProvider.productId);
-        pushTo(
-            context: context,
-            screen: ProductDetails(productId: productModelProvider.productId));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: InkWell(
+        onTap: () {
+          viewedRecentlyProvider.addProductToViewedRecently(
+            productId: productModelProvider.productId,
+          );
+          pushTo(
+              context: context,
+              screen:
+                  ProductDetails(productId: productModelProvider.productId));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: FancyShimmerImage(
                     imageUrl: productModelProvider.productImage,
-                    width: AppConst.size(context).width * 0.2,
-                    height: AppConst.size(context).height * 0.12,
+                    boxFit: BoxFit.cover,
+                    width: AppConst.size(context).width * 0.15,
+                    height: AppConst.size(context).height * 0.11,
                   ),
                 ),
                 const SizedBox(
@@ -59,7 +62,8 @@ class LastArrivalProduct extends StatelessWidget {
                     Row(
                       children: [
                         HeartButtonWidget(
-                            productId: productModelProvider.productId),
+                          productId: productModelProvider.productId,
+                        ),
                         const SizedBox(
                           width: 20,
                         ),
@@ -73,14 +77,16 @@ class LastArrivalProduct extends StatelessWidget {
                                       productID: productModelProvider.productId)
                                   ? Icons.check
                                   : Icons.add_shopping_cart_rounded,
+                              color: Colors.grey,
                             )),
                       ],
                     ),
-                    SubtitleTextWidget(
-                      label: '${productModelProvider.productPrice}\$',
-                      color: Colors.blue,
-                      maxLines: 1,
-                    ),
+                    // SubtitleTextWidget(
+                    //   label: '${productModelProvider.productPrice}\$',
+                    //   color: Colors.blue,
+                    //   fontSize: 5,
+                    //   maxLines: 1,
+                    // ),
                   ],
                 )
               ],

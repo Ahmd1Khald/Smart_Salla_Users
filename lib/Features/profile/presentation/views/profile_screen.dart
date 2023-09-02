@@ -37,11 +37,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       //MyAppMethods.loadingPage(context: context);
       userModel = await userProvider.fetchUserData();
-      setState(() {});
+      //setState(() {});
       print(userModel?.userEmail ?? 'no data');
       print('++++++++++++++++++++++');
     } catch (error) {
-      await MyAppMethods.showErrorORWarningDialog(
+      MyAppMethods.showErrorORWarningDialog(
           context: context,
           subtitle: 'Error occured $error',
           fct: () {

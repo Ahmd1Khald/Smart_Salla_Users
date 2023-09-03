@@ -7,21 +7,16 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SingleChildScrollView(
-          child: SafeArea(
-            child: Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                const BaskGroundWidget(),
-                MainContainer(),
-              ],
-            ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              const BaskGroundWidget(),
+              MainContainer(),
+            ],
           ),
         ),
       ),

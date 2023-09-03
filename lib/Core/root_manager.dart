@@ -33,7 +33,7 @@ class Routes {
       // case Routes.productDetailsRoute:
       //   return MaterialPageRoute(builder: (_) => const ProductDetails());
       case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => const RootScreens());
+        return MaterialPageRoute(builder: (_) => const RoutScreens());
       case Routes.wishListRoute:
         return MaterialPageRoute(builder: (_) => const WishListScreen());
       case Routes.viewedRecentlyRoute:

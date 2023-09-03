@@ -9,14 +9,14 @@ import 'package:salla_users/Features/search/presentation/views/search_secreen.da
 
 import '../../../cart/presentation/controller/provider/cart_provider.dart';
 
-class RootScreens extends StatefulWidget {
-  const RootScreens({Key? key}) : super(key: key);
+class RoutScreens extends StatefulWidget {
+  const RoutScreens({Key? key}) : super(key: key);
 
   @override
-  State<RootScreens> createState() => _RootScreensState();
+  State<RoutScreens> createState() => _RoutScreensState();
 }
 
-class _RootScreensState extends State<RootScreens> {
+class _RoutScreensState extends State<RoutScreens> {
   late PageController pageController;
   int currentScreen = 0;
   List<Widget> screens = [

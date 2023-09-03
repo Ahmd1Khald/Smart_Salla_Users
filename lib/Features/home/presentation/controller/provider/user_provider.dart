@@ -19,6 +19,7 @@ class UserProvider with ChangeNotifier {
           .collection(AppStrings.userCollection)
           .doc(user.uid)
           .get();
+      print(userDoc.data());
       final userDocDict = userDoc.data();
       userModel = UserModel(
         createdAt: userDoc.get('createdAt'),

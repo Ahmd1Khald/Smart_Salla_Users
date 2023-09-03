@@ -51,13 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   @override
-  void initState() {
-    //MyAppMethods.loadingPage(context: context);
-    fetchUserInfo();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
@@ -73,8 +66,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 20,
               ),
-              user != null
-                  ? Padding(
+              StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    User user = snapshot.data;
+                    return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Row(
                         children: [
@@ -92,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
                               child: FancyShimmerImage(
-                                imageUrl:
+                                imageUrl: user.photoURL ??
                                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
                               ),
                             ),
@@ -104,15 +101,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TitlesTextWidget(
-                                  label: userModel?.userName ?? 'No name'),
+                                  label: user.displayName ?? 'No name'),
                               SubtitleTextWidget(
-                                  label: userModel?.userEmail ?? 'No email'),
+                                  label: user.email ?? 'No email'),
                             ],
                           ),
                         ],
                       ),
-                    )
-                  : const SizedBox.shrink(),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12.0,

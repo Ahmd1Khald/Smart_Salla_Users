@@ -25,9 +25,8 @@ class _RoutScreensState extends State<RoutScreens> {
       categoryName: null,
     ),
     const CartScreen(),
-    const ProfileScreen()
+    ProfileScreen()
   ];
-
   @override
   void initState() {
     super.initState();

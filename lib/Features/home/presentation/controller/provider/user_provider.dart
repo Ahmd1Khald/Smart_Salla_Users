@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
-import 'package:salla_users/Features/home/data/models/user_model.dart';
+
+import '../../../data/models/user_model.dart';
 
 class UserProvider with ChangeNotifier {
   UserModel? userModel;
@@ -10,28 +11,30 @@ class UserProvider with ChangeNotifier {
     return userModel;
   }
 
-  Future<UserModel?> fetchUserData() async {
+  Future<UserModel?> fetchUserInfo() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
-    if (user == null) return null;
+    if (user == null) {
+      return null;
+    }
+    var uid = user.uid;
     try {
       final userDoc = await FirebaseFirestore.instance
           .collection(AppStrings.userCollection)
-          .doc(user.uid)
+          .doc(uid)
           .get();
-      print(userDoc.data());
       final userDocDict = userDoc.data();
       userModel = UserModel(
-        createdAt: userDoc.get('createdAt'),
-        userCart:
-            userDocDict!.containsKey('userCart') ? userDoc.get('userCart') : [],
-        userWishlist: userDocDict.containsKey('userWishlist')
-            ? userDoc.get('userWishlist')
-            : [],
-        userId: userDoc.get('userId'),
-        userName: userDoc.get('userName'),
-        userImage: userDoc.get('userImage'),
+        userId: userDoc.get("userId"),
+        userName: userDoc.get("userName"),
+        userImage: userDoc.get("userImage"),
         userEmail: userDoc.get('userEmail'),
+        userCart:
+            userDocDict!.containsKey("userCart") ? userDoc.get("userCart") : [],
+        userWish: userDocDict.containsKey("userWishlist")
+            ? userDoc.get("userWishlist")
+            : [],
+        createdAt: userDoc.get('createdAt'),
       );
       return userModel;
     } on FirebaseException catch (error) {

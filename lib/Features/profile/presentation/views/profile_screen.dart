@@ -18,36 +18,48 @@ import '../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel? userModel;
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel? userModel;
-
   Future<void> fetchUserInfo() async {
-    if (user == null) {
-      //Navigator.pop(context);
+    print("start fetchUserInfo ---->");
+    if (widget.user == null) {
+      // setState(() {
+      //   //_isLoading = false;
+      // });
       return;
     }
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      //MyAppMethods.loadingPage(context: context);
-      userModel = await userProvider.fetchUserData();
-      //setState(() {});
-      print(userModel?.userEmail ?? 'no data');
-      print('++++++++++++++++++++++');
+      widget.userModel = await userProvider.fetchUserInfo().then((value) {
+        print("--------------------------------");
+        print(widget.userModel?.userName);
+        print("--------------------------------");
+        print(widget.userModel);
+      });
     } catch (error) {
-      MyAppMethods.showErrorORWarningDialog(
-          context: context,
-          subtitle: 'Error occured $error',
-          fct: () {
-            //Navigator.pop(context);
-          });
+      await MyAppMethods.showErrorORWarningDialog(
+        context: context,
+        subtitle: "An error has been occured $error",
+        fct: () {},
+      );
+    } finally {
+      // setState(() {
+      //   _isLoading = false;
+      // });
     }
+  }
+
+  @override
+  void initState() {
+    fetchUserInfo();
+    super.initState();
   }
 
   @override
@@ -60,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Visibility(
-                visible: user == null ? true : false,
+                visible: widget.user == null ? true : false,
                 child: const PleaseText(),
               ),
               const SizedBox(
@@ -204,8 +216,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   );
                 },
-                title: user == null ? 'Login' : 'Logout',
-                icon: user == null ? Icons.login : Icons.logout,
+                title: widget.user == null ? 'Login' : 'Logout',
+                icon: widget.user == null ? Icons.login : Icons.logout,
               )
             ],
           ),

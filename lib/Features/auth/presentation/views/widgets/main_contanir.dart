@@ -32,7 +32,7 @@ class _MainContainerState extends State<MainContainer> {
       width: MediaQuery.of(context).size.width * 0.85,
       decoration: BoxDecoration(
         boxShadow: [
-          shadow(),
+          shadow(context),
         ],
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(40),

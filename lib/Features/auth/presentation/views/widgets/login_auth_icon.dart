@@ -27,7 +27,7 @@ class LoginIcons extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.white,
                 boxShadow: [
-                  shadow(),
+                  shadow(context),
                 ],
               ),
               child: CircleAvatar(

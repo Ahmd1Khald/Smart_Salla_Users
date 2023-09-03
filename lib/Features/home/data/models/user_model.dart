@@ -8,12 +8,12 @@ class UserModel with ChangeNotifier {
   final String userEmail;
   final Timestamp createdAt;
   final List userCart;
-  final List userWishlist;
+  final List userWish;
 
   UserModel({
     required this.createdAt,
     required this.userCart,
-    required this.userWishlist,
+    required this.userWish,
     required this.userId,
     required this.userName,
     required this.userImage,

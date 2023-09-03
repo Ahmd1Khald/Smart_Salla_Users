@@ -10,6 +10,9 @@ class AppStyles {
       scaffoldBackgroundColor: isDarkTheme
           ? AppColors.darkScaffoldColor
           : AppColors.lightScaffoldColor,
+      shadowColor: isDarkTheme
+          ? Colors.black.withOpacity(0.5)
+          : Colors.grey.withOpacity(0.5),
       cardColor:
           isDarkTheme ? AppColors.darkCardColor : AppColors.lightCardColor,
       brightness: isDarkTheme ? Brightness.dark : Brightness.light,

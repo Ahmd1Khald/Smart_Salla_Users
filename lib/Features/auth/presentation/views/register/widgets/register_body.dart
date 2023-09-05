@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -56,6 +59,7 @@ class _RegisterBodyState extends State<RegisterBody> {
           widget.pickedImage =
               await picker.pickImage(source: ImageSource.camera);
           setState(() {});
+          await uploadUserImageAndGiveLink(context);
         },
         galleryFCT: () async {
           widget.pickedImage =
@@ -214,6 +218,24 @@ class _RegisterBodyState extends State<RegisterBody> {
       'createdAt': Timestamp.now(),
       'userCart': [],
       'userWishlist': [],
+    });
+  }
+
+  Future<void> uploadUserImageAndGiveLink(
+    BuildContext context,
+  ) async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('users_images')
+        .child("1")
+        .child("1.png");
+
+    await ref.putFile(File(widget.pickedImage!.path)).then((p0) async {
+      await ref.getDownloadURL().then((url) {
+        print(url ?? "No url found");
+      });
     });
   }
 }

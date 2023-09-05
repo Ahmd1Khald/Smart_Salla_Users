@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 import 'package:salla_users/firebase_options.dart';
 
-import 'Core/root_manager.dart';
 import 'Core/utiles/constance/app_styles.dart';
 import 'Features/cart/presentation/controller/provider/cart_provider.dart';
 import 'Features/home/presentation/controller/provider/user_provider.dart';
@@ -75,9 +75,9 @@ class MyApp extends StatelessWidget {
                   isDarkTheme: themeProvider.getIsDarkTheme,
                   context: context,
                 ),
-                onGenerateRoute: Routes.getRoute,
-                initialRoute: Routes.loginRoute,
-                // home: AuthMiddleWare.loginMiddleware(),
+                //onGenerateRoute: Routes.getRoute,
+                //initialRoute: Routes.loginRoute,
+                home: const RoutScreens(),
               );
             },
           ),

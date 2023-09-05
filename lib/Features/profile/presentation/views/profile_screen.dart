@@ -1,7 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Features/auth/presentation/views/login_screen.dart';
 import 'package:salla_users/Features/home/data/models/user_model.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/user_provider.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/custom_listtile.dart';
@@ -10,6 +12,7 @@ import 'package:salla_users/Features/profile/presentation/views/widgets/please_t
 
 import '../../../../Core/providers/theme_provider.dart';
 import '../../../../Core/root_manager.dart';
+import '../../../../Core/utiles/app_functions.dart';
 import '../../../../Core/utiles/app_variables.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
@@ -28,6 +31,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final GoogleSignIn gSignIn = GoogleSignIn();
   Future<void> fetchUserInfo() async {
     print("start fetchUserInfo ---->");
     if (widget.user == null) {
@@ -40,6 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       //MyAppMethods.loadingPage(context: context);
       AppVariables.userdata = await userProvider.fetchUserInfo();
+      setState(() {});
       //Navigator.pop(context);
       print(AppVariables.userdata ?? 'no name');
     } catch (error) {
@@ -82,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   //MyAppMethods.loadingPage(context: context);
                   fetchUserInfo();
-                  print(AppVariables.userdata?.userImage ?? "No image");
+                  //print(AppVariables.userdata?.userImage ?? "No image");
                   if (snapshot.hasData) {
                     //User user = snapshot.data;
                     return Padding(
@@ -105,7 +110,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: FancyShimmerImage(
                                 imageUrl: AppVariables.userdata?.userImage == ""
                                     ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-                                    : AppVariables.userdata!.userImage,
+                                    : AppVariables.userdata?.userImage ??
+                                        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
                               ),
                             ),
                           ),
@@ -119,8 +125,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   label: AppVariables.userdata?.userName ??
                                       'No name'),
                               SubtitleTextWidget(
-                                  label: AppVariables.userdata?.userEmail ??
-                                      'No email'),
+                                label: AppVariables.userdata?.userEmail ??
+                                    'No email',
+                                fontSize: 15,
+                              ),
                             ],
                           ),
                         ],
@@ -207,12 +215,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                         func2: () async {
                           MyAppMethods.loadingPage(context: context);
-                          await FirebaseAuth.instance.signOut().then((value) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              Routes.loginRoute,
-                            );
-                          });
+                          await FirebaseAuth.instance.signOut().then(
+                              (value) async => await gSignIn.signOut().then(
+                                  (value) => AppFunction.pushAndRemove(
+                                      context, const LoginScreen())));
                         },
                         title: 'Are you sure ?',
                         subTitle1: 'NO',

@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:salla_users/Core/utiles/constance/assets_images.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/signin_google_button.dart';
 
 import '../../../../../Core/root_manager.dart';
+import '../../../../../Core/utiles/app_functions.dart';
+import '../../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../../Core/utiles/constance/text_styles/title_text.dart';
+import '../../../../../Core/utiles/widgets/my_app_method.dart';
+import '../../../../root_screens/presentaiton/views/root_screens.dart';
 import 'guest_button.dart';
 import 'or line.dart';
 
@@ -19,74 +26,73 @@ class BaskGroundWidget extends StatefulWidget {
 class _BaskGroundWidgetState extends State<BaskGroundWidget> {
   final GoogleSignIn gSignIn = GoogleSignIn();
 
-  // Future<void> googleSignIn() async {
-  //   MyAppMethods.loadingPage(context: context);
-  //   try {
-  //     // Create a new instance of GoogleSignIn
-  //
-  //     // Start the Google Sign-In process
-  //     final GoogleSignInAccount? account = await gSignIn.signIn();
-  //
-  //     if (account != null) {
-  //       // Retrieve the authentication token
-  //       final GoogleSignInAuthentication authentication =
-  //           await account.authentication;
-  //
-  //       // Use the token to sign in to your Firebase backend
-  //       // For example:
-  //       final AuthCredential authCredential = GoogleAuthProvider.credential(
-  //         accessToken: authentication.accessToken,
-  //         idToken: authentication.idToken,
-  //       );
-  //       final authResult = await FirebaseAuth.instance
-  //           .signInWithCredential(authCredential)
-  //           .then((value) async {
-  //         Navigator.pushReplacementNamed(context, Routes.homeRoute);
-  //       });
-  //       await FirebaseFirestore.instance
-  //           .collection(AppStrings.userCollection)
-  //           .doc(authResult.)
-  //           .set({
-  //         'userId': user.uid,
-  //         'userName': widget.nameController.text,
-  //         'userImage': "",
-  //         'userEmail': widget.emailController.text.toLowerCase(),
-  //         'createdAt': Timestamp.now(),
-  //         'userCart': [],
-  //         'userWishlist': [],
-  //       });
-  //       final UserCredential userCredential =
-  //           await FirebaseAuth.instance.signInWithCredential(authCredential);
-  //
-  //       // If sign-in is successful, proceed with the rest of your logic
-  //       // ...
-  //     } else {
-  //       Fluttertoast.showToast(
-  //         msg: "Google Sign-In canceled",
-  //         toastLength: Toast.LENGTH_SHORT,
-  //         textColor: Colors.white,
-  //       );
-  //       // User canceled the sign-in process
-  //       print('Google Sign-In canceled by user');
-  //     }
-  //   } on FirebaseAuthException catch (error) {
-  //     await MyAppMethods.showErrorORWarningDialog(
-  //       context: context,
-  //       subtitle: "An error has been occured ${error.message}",
-  //       fct: () {
-  //         Navigator.pop(context);
-  //       },
-  //     );
-  //   } catch (error) {
-  //     await MyAppMethods.showErrorORWarningDialog(
-  //       context: context,
-  //       subtitle: "An error has been occured $error",
-  //       fct: () {
-  //         Navigator.pop(context);
-  //       },
-  //     );
-  //   }
-  // }
+  Future<void> googleSignIn() async {
+    MyAppMethods.loadingPage(context: context);
+    try {
+      // Start the Google Sign-In process
+      final GoogleSignInAccount? account = await gSignIn.signIn();
+
+      if (account != null) {
+        // Retrieve the authentication token
+        final GoogleSignInAuthentication authentication =
+            await account.authentication;
+
+        // Use the token to sign in to your Firebase backend
+        // For example:
+        final AuthCredential authCredential = GoogleAuthProvider.credential(
+          accessToken: authentication.accessToken,
+          idToken: authentication.idToken,
+        );
+        final authResult =
+            await FirebaseAuth.instance.signInWithCredential(authCredential);
+
+        if (authResult.additionalUserInfo!.isNewUser) {
+          await FirebaseFirestore.instance
+              .collection(AppStrings.userCollection)
+              .doc(authResult.user!.uid)
+              .set({
+            'userId': authResult.user!.uid,
+            'userName': authResult.user!.displayName,
+            'userImage': authResult.user!.photoURL,
+            'userEmail': authResult.user!.email,
+            'createdAt': Timestamp.now(),
+            'userCart': [],
+            'userWishlist': [],
+          }).then((value) =>
+                  AppFunction.pushAndRemove(context, const RoutScreens()));
+        }
+        await FirebaseAuth.instance.signInWithCredential(authCredential).then(
+            (value) => AppFunction.pushAndRemove(context, const RoutScreens()));
+
+        // If sign-in is successful, proceed with the rest of your logic
+        // ...
+      } else {
+        Fluttertoast.showToast(
+          msg: "Google Sign-In canceled",
+          toastLength: Toast.LENGTH_SHORT,
+          textColor: Colors.white,
+        );
+        // User canceled the sign-in process
+        print('Google Sign-In canceled by user');
+      }
+    } on FirebaseAuthException catch (error) {
+      await MyAppMethods.showErrorORWarningDialog(
+        context: context,
+        subtitle: "An error has been occured ${error.message}",
+        fct: () {
+          Navigator.pop(context);
+        },
+      );
+    } catch (error) {
+      await MyAppMethods.showErrorORWarningDialog(
+        context: context,
+        subtitle: "An error has been occured $error",
+        fct: () {
+          Navigator.pop(context);
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,14 +129,16 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
                 children: [
                   GoogleSignInButton(
                     function: () async {
-                      //await googleSignIn();
+                      await googleSignIn();
                     },
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.04,
                   ),
                   GuestButton(
-                    function: () {},
+                    function: () {
+                      AppFunction.pushAndRemove(context, const RoutScreens());
+                    },
                   ),
                 ],
               ),

@@ -30,7 +30,10 @@ class ProfileScreen extends StatefulWidget {
   UserModel? userModel;
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   final GoogleSignIn gSignIn = GoogleSignIn();
   Future<void> fetchUserInfo() async {
     print("start fetchUserInfo ---->");
@@ -63,6 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    fetchUserInfo();
     super.initState();
   }
 
@@ -86,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   //MyAppMethods.loadingPage(context: context);
-                  fetchUserInfo();
+
                   //print(AppVariables.userdata?.userImage ?? "No image");
                   if (snapshot.hasData) {
                     //User user = snapshot.data;

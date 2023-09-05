@@ -12,8 +12,9 @@ import 'package:salla_users/Features/auth/presentation/views/register/widgets/re
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/repeat_password_textfield.dart';
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/show_alert_picker.dart';
 import 'package:salla_users/Features/auth/presentation/views/register/widgets/sign_up.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 
-import '../../../../../../Core/root_manager.dart';
+import '../../../../../../Core/utiles/app_functions.dart';
 import '../../../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../../../Core/utiles/widgets/email_textfield.dart';
 import '../../../../../../Core/utiles/widgets/my_app_method.dart';
@@ -29,6 +30,7 @@ class RegisterBody extends StatefulWidget {
   var repeatPassController = TextEditingController();
   var nameController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  String? userReturnedUrl;
   XFile? pickedImage;
   @override
   State<RegisterBody> createState() => _RegisterBodyState();
@@ -155,8 +157,8 @@ class _RegisterBodyState extends State<RegisterBody> {
                             );
 
                             await addDataToFirestore().then((value) =>
-                                Navigator.pushReplacementNamed(
-                                    context, Routes.homeRoute));
+                                AppFunction.pushAndRemove(
+                                    context, const RoutScreens()));
                             Fluttertoast.showToast(
                               msg: "An account has been created",
                               toastLength: Toast.LENGTH_SHORT,
@@ -207,34 +209,34 @@ class _RegisterBodyState extends State<RegisterBody> {
 
   Future<void> addDataToFirestore() async {
     User? user = auth.currentUser;
-    await FirebaseFirestore.instance
-        .collection(AppStrings.userCollection)
-        .doc(user!.uid)
-        .set({
-      'userId': user.uid,
-      'userName': widget.nameController.text,
-      'userImage': "",
-      'userEmail': widget.emailController.text.toLowerCase(),
-      'createdAt': Timestamp.now(),
-      'userCart': [],
-      'userWishlist': [],
+    uploadUserImageAndGiveLink(context).then((value) async {
+      await FirebaseFirestore.instance
+          .collection(AppStrings.userCollection)
+          .doc(user!.uid)
+          .set({
+        'userId': user.uid,
+        'userName': widget.nameController.text,
+        'userImage': widget.userReturnedUrl,
+        'userEmail': widget.emailController.text.toLowerCase(),
+        'createdAt': Timestamp.now(),
+        'userCart': [],
+        'userWishlist': [],
+      });
     });
   }
 
   Future<void> uploadUserImageAndGiveLink(
     BuildContext context,
   ) async {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
-
     final ref = FirebaseStorage.instance
         .ref()
         .child('users_images')
-        .child("1")
-        .child("1.png");
+        .child("${widget.emailController.text.trim()}.jpg");
 
     await ref.putFile(File(widget.pickedImage!.path)).then((p0) async {
       await ref.getDownloadURL().then((url) {
-        print(url ?? "No url found");
+        widget.userReturnedUrl = url;
+        print(widget.userReturnedUrl ?? "No url found");
       });
     });
   }

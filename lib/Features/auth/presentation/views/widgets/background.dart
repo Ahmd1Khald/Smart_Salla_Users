@@ -6,13 +6,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:salla_users/Core/utiles/constance/assets_images.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/signin_google_button.dart';
 
-import '../../../../../Core/root_manager.dart';
 import '../../../../../Core/utiles/app_functions.dart';
 import '../../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../../Core/utiles/constance/text_styles/title_text.dart';
 import '../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../root_screens/presentaiton/views/root_screens.dart';
+import '../register/register_screen.dart';
 import 'guest_button.dart';
 import 'or line.dart';
 
@@ -155,7 +155,7 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, Routes.registerRoute);
+                      AppFunction.pushTo(context, const RegisterScreen());
                     },
                     child: const SubtitleTextWidget(
                       label: 'Sign Up',

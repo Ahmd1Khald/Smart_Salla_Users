@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:salla_users/Core/utiles/app_functions.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
+import 'package:salla_users/Features/auth/presentation/views/register/register_screen.dart';
 import 'package:salla_users/Features/auth/presentation/views/widgets/register_title.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 
-import '../../../../../Core/root_manager.dart';
 import '../../../../../Core/utiles/widgets/email_textfield.dart';
 import '../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../../Core/utiles/widgets/password_textfield.dart';
@@ -60,8 +62,7 @@ class _MainContainerState extends State<MainContainer> {
                 alignment: AlignmentDirectional.topEnd,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(
-                        context, Routes.forgotPasswordScreenRoute);
+                    AppFunction.pushTo(context, const RegisterScreen());
                   },
                   child: const SubtitleTextWidget(
                     label: 'Forget password?',
@@ -87,8 +88,8 @@ class _MainContainerState extends State<MainContainer> {
                             email: widget.emailController.text.trim(),
                             password: widget.passController.text.trim(),
                           )
-                          .then((value) => Navigator.pushReplacementNamed(
-                              context, Routes.homeRoute));
+                          .then((value) => AppFunction.pushAndRemove(
+                              context, const RoutScreens()));
                       Fluttertoast.showToast(
                         msg: "Login Success!",
                         toastLength: Toast.LENGTH_SHORT,

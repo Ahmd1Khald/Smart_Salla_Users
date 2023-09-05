@@ -11,4 +11,14 @@ class AppFunction {
       (route) => false,
     );
   }
+
+  static void pushTo(
+    BuildContext context,
+    Widget screen,
+  ) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => screen),
+    );
+  }
 }

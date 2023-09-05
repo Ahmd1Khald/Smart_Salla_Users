@@ -36,6 +36,7 @@ class UserProvider with ChangeNotifier {
             : [],
         createdAt: userDoc.get('createdAt'),
       );
+      print(userModel.toString());
       return userModel;
     } on FirebaseException catch (error) {
       throw error.message.toString();

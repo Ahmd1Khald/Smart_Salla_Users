@@ -10,6 +10,7 @@ import 'package:salla_users/Features/profile/presentation/views/widgets/please_t
 
 import '../../../../Core/providers/theme_provider.dart';
 import '../../../../Core/root_manager.dart';
+import '../../../../Core/utiles/app_variables.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/constance/text_styles/subtitle_text.dart';
 import '../../../../Core/utiles/constance/text_styles/title_text.dart';
@@ -37,13 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      widget.userModel = await userProvider.fetchUserInfo().then((value) {
-        print("--------------------------------");
-        print(widget.userModel?.userName);
-        print("--------------------------------");
-        print(widget.userModel);
-      });
+      AppVariables.userdata = await userProvider.fetchUserInfo();
+      print(AppVariables.userdata ?? 'no name');
     } catch (error) {
+      print(error.toString());
       await MyAppMethods.showErrorORWarningDialog(
         context: context,
         subtitle: "An error has been occured $error",
@@ -82,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    User user = snapshot.data;
+                    //User user = snapshot.data;
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Row(
@@ -101,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25),
                               child: FancyShimmerImage(
-                                imageUrl: user.photoURL ??
+                                imageUrl: AppVariables.userdata?.userImage ??
                                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png",
                               ),
                             ),
@@ -113,9 +111,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TitlesTextWidget(
-                                  label: user.displayName ?? 'No name'),
+                                  label: AppVariables.userdata?.userName ??
+                                      'No name'),
                               SubtitleTextWidget(
-                                  label: user.email ?? 'No email'),
+                                  label: AppVariables.userdata?.userEmail ??
+                                      'No email'),
                             ],
                           ),
                         ],

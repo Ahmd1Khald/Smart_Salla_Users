@@ -211,7 +211,7 @@ class _RegisterBodyState extends State<RegisterBody> {
     User? user = auth.currentUser;
     uploadUserImageAndGiveLink(context).then((value) async {
       await FirebaseFirestore.instance
-          .collection(AppStrings.userCollection)
+          .collection(AppStrings.usersCollection)
           .doc(user!.uid)
           .set({
         'userId': user.uid,

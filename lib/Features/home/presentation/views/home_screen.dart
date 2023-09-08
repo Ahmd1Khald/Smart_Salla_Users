@@ -31,15 +31,19 @@ class HomeScreen extends StatelessWidget {
                 banners: AppConst.banners,
               ),
               const HomeConstTitle(title: AppStrings.latestArrivalString),
-              SizedBox(
-                height: AppConst.size(context).height * 0.147,
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) => ChangeNotifierProvider.value(
-                    value: productProvider.getProduct[index],
-                    child: const LastArrivalProduct(),
+              Visibility(
+                visible: productProvider.getProduct.isNotEmpty,
+                child: SizedBox(
+                  height: AppConst.size(context).height * 0.147,
+                  child: ListView.builder(
+                    itemCount: productProvider.getProduct.length,
+                    itemBuilder: (context, index) =>
+                        ChangeNotifierProvider.value(
+                      value: productProvider.getProduct[index],
+                      child: const LastArrivalProduct(),
+                    ),
+                    scrollDirection: Axis.horizontal,
                   ),
-                  scrollDirection: Axis.horizontal,
                 ),
               ),
               const HomeConstTitle(title: AppStrings.categoriesString),

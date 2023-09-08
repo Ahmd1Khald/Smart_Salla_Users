@@ -25,120 +25,65 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
+    return MaterialApp(
+      title: AppStrings.appName,
+      debugShowCheckedModeBanner: false,
+      home: FutureBuilder(
+        future: Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                body: const Center(
+                  child: SpinKitPouringHourGlass(
+                    color: Colors.orangeAccent,
+                    size: 50,
+                  ),
+                ),
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return MaterialApp(
+              home: Scaffold(
+                body: Center(
+                  child: SelectableText(
+                      "An Error has been occured ${snapshot.error}"),
+                ),
+              ),
+            );
+          }
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => ThemeProvider()),
+              ChangeNotifierProvider(create: (_) => ProductProvider()),
+              ChangeNotifierProvider(create: (_) => CartProvider()),
+              ChangeNotifierProvider(create: (_) => WishListProvider()),
+              ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
+              ChangeNotifierProvider(create: (_) => UserProvider()),
+            ],
+            child: Consumer<ThemeProvider>(
+              builder: (context, themeProvider, child) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: AppStrings.appName,
+                  theme: AppStyles.themeData(
+                    isDarkTheme: themeProvider.getIsDarkTheme,
+                    context: context,
+                  ),
+                  //onGenerateRoute: Routes.getRoute,
+                  //initialRoute: Routes.loginRoute,
+                  home: const RoutScreens(),
+                );
+              },
+            ),
+          );
+        },
       ),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appName,
-            home: Scaffold(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              body: const Center(
-                child: SpinKitPouringHourGlass(
-                  color: Colors.orangeAccent,
-                  size: 50,
-                ),
-              ),
-            ),
-          );
-        }
-        if (snapshot.hasError) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appName,
-            home: Scaffold(
-              body: Center(
-                child: SelectableText(
-                    "An Error has been occured ${snapshot.error}"),
-              ),
-            ),
-          );
-        }
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => ThemeProvider()),
-            ChangeNotifierProvider(create: (_) => ProductProvider()),
-            ChangeNotifierProvider(create: (_) => CartProvider()),
-            ChangeNotifierProvider(create: (_) => WishListProvider()),
-            ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-          ],
-          child: Consumer<ThemeProvider>(
-            builder: (context, themeProvider, child) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: AppStrings.appName,
-                theme: AppStyles.themeData(
-                  isDarkTheme: themeProvider.getIsDarkTheme,
-                  context: context,
-                ),
-                //onGenerateRoute: Routes.getRoute,
-                //initialRoute: Routes.loginRoute,
-                home: const RoutScreens(),
-              );
-            },
-          ),
-        );
-      },
     );
   }
-
-  // Widget build(BuildContext context) {
-  //   return FutureBuilder(
-  //     future: Firebase.initializeApp(
-  //       options: DefaultFirebaseOptions.currentPlatform,
-  //     ),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.waiting) {
-  //         return const MaterialApp(
-  //           debugShowCheckedModeBanner: false,
-  //           title: AppStrings.appName,
-  //           home: Scaffold(
-  //             body: Center(
-  //               child: CircularProgressIndicator(),
-  //             ),
-  //           ),
-  //         );
-  //       } else if (snapshot.hasError) {
-  //         return MaterialApp(
-  //           debugShowCheckedModeBanner: false,
-  //           title: AppStrings.appName,
-  //           home: Scaffold(
-  //             body: Center(
-  //               child: SelectableText(
-  //                   "An Error has been occured ${snapshot.error}"),
-  //             ),
-  //           ),
-  //         );
-  //       }
-  //       return MultiProvider(
-  //         providers: [
-  //           ChangeNotifierProvider(create: (_) => ThemeProvider()),
-  //           ChangeNotifierProvider(create: (_) => ProductProvider()),
-  //           ChangeNotifierProvider(create: (_) => CartProvider()),
-  //           ChangeNotifierProvider(create: (_) => WishListProvider()),
-  //           ChangeNotifierProvider(create: (_) => ViewedRecentlyProvider()),
-  //           ChangeNotifierProvider(create: (_) => UserProvider()),
-  //         ],
-  //         child:
-  //             Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-  //           return MaterialApp(
-  //             debugShowCheckedModeBanner: false,
-  //             title: AppStrings.appName,
-  //             theme: AppStyles.themeData(
-  //               isDarkTheme: themeProvider.getIsDarkTheme,
-  //               context: context,
-  //             ),
-  //             onGenerateRoute: Routes.getRoute,
-  //             //initialRoute: Routes.loginRoute,
-  //             home: AuthMiddleWare.loginMiddleware(),
-  //           );
-  //         }),
-  //       );
-  //     },
-  //   );
-  // }
 }

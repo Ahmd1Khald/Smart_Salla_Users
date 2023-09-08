@@ -48,7 +48,7 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
 
         if (authResult.additionalUserInfo!.isNewUser) {
           await FirebaseFirestore.instance
-              .collection(AppStrings.userCollection)
+              .collection(AppStrings.usersCollection)
               .doc(authResult.user!.uid)
               .set({
             'userId': authResult.user!.uid,

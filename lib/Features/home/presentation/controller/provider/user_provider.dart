@@ -20,7 +20,7 @@ class UserProvider with ChangeNotifier {
     var uid = user.uid;
     try {
       final userDoc = await FirebaseFirestore.instance
-          .collection(AppStrings.userCollection)
+          .collection(AppStrings.usersCollection)
           .doc(uid)
           .get();
       final userDocDict = userDoc.data();

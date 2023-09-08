@@ -1,6 +1,7 @@
 class AppStrings {
   static const appName = 'Smart Salla Users';
-  static const userCollection = 'Users';
+  static const usersCollection = 'Users';
+  static const productsCollection = 'products';
   static const noRoute = 'No page found';
   static const profileScreen = 'Profile Screen';
   static const pleaseString = "Please login to have ultimate access";

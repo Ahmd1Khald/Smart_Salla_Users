@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Features/cart/presentation/views/cart_screen.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
 import 'package:salla_users/Features/home/presentation/views/home_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/profile_screen.dart';
 import 'package:salla_users/Features/search/presentation/views/search_secreen.dart';
@@ -17,6 +18,23 @@ class RoutScreens extends StatefulWidget {
 }
 
 class _RoutScreensState extends State<RoutScreens> {
+  bool loading = true;
+  Future<void> fetchFCT() async {
+    final productsProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    try {
+      Future.wait({
+        productsProvider.fetchProducts(context),
+      });
+    } catch (error) {
+      print(error.toString());
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
   late PageController pageController;
   int currentScreen = 0;
   List<Widget> screens = [
@@ -33,6 +51,14 @@ class _RoutScreensState extends State<RoutScreens> {
     pageController = PageController(
       initialPage: currentScreen,
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (loading) {
+      fetchFCT();
+    }
+    super.didChangeDependencies();
   }
 
   @override

@@ -8,8 +8,8 @@ import 'package:salla_users/Features/home/presentation/views/widgets/home_cosnt_
 import 'package:salla_users/Features/home/presentation/views/widgets/latest_arrival_product.dart';
 import 'package:salla_users/Features/search/presentation/views/search_secreen.dart';
 
+import '../../../../Core/utiles/app_functions.dart';
 import '../../../../Core/utiles/constance/const_variable.dart';
-import '../../../../Core/utiles/widgets/push_widget.dart';
 import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 import '../controller/provider/product_provider.dart';
 
@@ -52,9 +52,9 @@ class HomeScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 builder: (context, index) => InkWell(
                   onTap: () {
-                    pushTo(
-                      context: context,
-                      screen: SearchScreen(
+                    AppFunction.pushTo(
+                      context,
+                      SearchScreen(
                           categoryName: AppConst.categoriesItems[index].name),
                     );
                   },

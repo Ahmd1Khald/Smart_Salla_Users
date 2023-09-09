@@ -2,9 +2,9 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
-import 'package:salla_users/Core/utiles/widgets/push_widget.dart';
 import 'package:salla_users/Features/home/presentation/views/product_details.dart';
 
+import '../../../../../Core/utiles/app_functions.dart';
 import '../../../../../Core/utiles/constance/const_variable.dart';
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
 import '../../../../cart/presentation/controller/provider/cart_provider.dart';
@@ -27,10 +27,8 @@ class LastArrivalProduct extends StatelessWidget {
           viewedRecentlyProvider.addProductToViewedRecently(
             productId: productModelProvider.productId,
           );
-          pushTo(
-              context: context,
-              screen:
-                  ProductDetails(productId: productModelProvider.productId));
+          AppFunction.pushTo(context,
+              ProductDetails(productId: productModelProvider.productId));
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,13 +2,14 @@ import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../Core/root_manager.dart';
+import '../../../../Core/utiles/app_functions.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/alert_widget.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
 import '../../../home/presentation/controller/provider/product_provider.dart';
+import '../../../root_screens/presentaiton/views/root_screens.dart';
 import '../../../search/presentation/views/widgets/product_item.dart';
 import '../controller/provider/viewed_recently_provider.dart';
 
@@ -25,7 +26,7 @@ class ViewedRecentlyScreen extends StatelessWidget {
         ? Scaffold(
             body: EmptyCartWidget(
               function: () {
-                Navigator.pushNamed(context, Routes.homeRoute);
+                AppFunction.pushAndRemove(context, const RoutScreens());
               },
               title: AppStrings.whoopsViewedRecentlyString,
               subTitle: AppStrings.wishListEmptyString,

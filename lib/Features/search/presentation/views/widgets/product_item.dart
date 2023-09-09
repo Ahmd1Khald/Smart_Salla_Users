@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Core/utiles/app_functions.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
-import 'package:salla_users/Core/utiles/widgets/push_widget.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
 import 'package:salla_users/Features/home/presentation/views/product_details.dart';
 
@@ -36,9 +36,9 @@ class ProductItem extends StatelessWidget {
               viewedRecentlyProvider.addProductToViewedRecently(
                 productId: getCurrProduct.productId,
               );
-              pushTo(
-                context: context,
-                screen: ProductDetails(
+              AppFunction.pushTo(
+                context,
+                ProductDetails(
                   productId: getCurrProduct.productId,
                 ),
               );

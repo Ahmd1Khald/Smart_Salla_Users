@@ -6,12 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:salla_users/Features/auth/presentation/views/login_screen.dart';
 import 'package:salla_users/Features/home/data/models/user_model.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/user_provider.dart';
+import 'package:salla_users/Features/profile/presentation/views/orders_screen.dart';
+import 'package:salla_users/Features/profile/presentation/views/viewed_recently_screen.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/custom_listtile.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/logout_button.dart';
 import 'package:salla_users/Features/profile/presentation/views/widgets/please_text.dart';
+import 'package:salla_users/Features/profile/presentation/views/wish_list_screen.dart';
 
 import '../../../../Core/providers/theme_provider.dart';
-import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/app_functions.dart';
 import '../../../../Core/utiles/app_variables.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
@@ -157,22 +159,22 @@ class _ProfileScreenState extends State<ProfileScreen>
                       imagePath: AssetsImages.orderSvg,
                       text: "All orders",
                       function: () {
-                        Navigator.pushNamed(context, Routes.ordersRoute);
+                        AppFunction.pushTo(context, const OrdersScreen());
                       },
                     ),
                     CustomListTile(
                       imagePath: AssetsImages.wishlistSvg,
                       text: "Wishlist",
                       function: () {
-                        Navigator.pushNamed(context, Routes.wishListRoute);
+                        AppFunction.pushTo(context, const WishListScreen());
                       },
                     ),
                     CustomListTile(
                       imagePath: AssetsImages.recent,
                       text: "Viewed recently",
                       function: () {
-                        Navigator.pushNamed(
-                            context, Routes.viewedRecentlyRoute);
+                        AppFunction.pushTo(
+                            context, const ViewedRecentlyScreen());
                       },
                     ),
                     CustomListTile(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Core/root_manager.dart';
+import '../../../../Core/utiles/app_functions.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/custom_app_bar.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
+import '../../../root_screens/presentaiton/views/root_screens.dart';
 import 'order_widget.dart';
 
 class OrdersScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class OrdersScreen extends StatelessWidget {
               buttonText: AppStrings.shopNowString,
               image: AssetsImages.bagWish,
               function: () {
-                Navigator.pushNamed(context, Routes.homeRoute);
+                AppFunction.pushAndRemove(context, const RoutScreens());
               },
             ),
           )

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Core/utiles/app_functions.dart';
 import 'package:salla_users/Features/cart/presentation/controller/provider/cart_provider.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/cart_widget.dart';
 import 'package:salla_users/Features/cart/presentation/views/widgets/checkout_bottom_sheet.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 
-import '../../../../Core/root_manager.dart';
 import '../../../../Core/utiles/constance/app_strings.dart';
 import '../../../../Core/utiles/constance/assets_images.dart';
 import '../../../../Core/utiles/widgets/alert_widget.dart';
@@ -27,7 +28,7 @@ class CartScreen extends StatelessWidget {
               buttonText: AppStrings.shopNowString,
               image: AssetsImages.bagWish,
               function: () {
-                Navigator.pushNamed(context, Routes.homeRoute);
+                AppFunction.pushAndRemove(context, const RoutScreens());
               },
             ),
           )

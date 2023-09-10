@@ -46,6 +46,7 @@ dependencies:
   uuid: ^3.0.7
   flutter_spinkit:
   fluttertoast: ^8.2.2
+  video_player: ^2.2.16
   #firebase
   firebase_core: ^2.15.1
   firebase_auth: ^4.7.3

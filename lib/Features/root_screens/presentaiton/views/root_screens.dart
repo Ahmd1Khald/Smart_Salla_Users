@@ -23,15 +23,15 @@ class _RoutScreensState extends State<RoutScreens> {
     final productsProvider =
         Provider.of<ProductProvider>(context, listen: false);
     try {
-      Future.wait({
-        productsProvider.fetchProducts(context),
-      });
+      if (loading == true) {
+        Future.wait({
+          productsProvider.fetchProducts(context),
+        });
+      }
     } catch (error) {
       print(error.toString());
     } finally {
-      setState(() {
-        loading = false;
-      });
+      loading = false;
     }
   }
 

@@ -46,6 +46,7 @@ class ProductProvider with ChangeNotifier {
     try {
       await productDB.get().then((value) {
         print(value.docs.length);
+        _products.clear();
         for (var element in value.docs) {
           _products.insert(0, ProductModel.fromFirestore(element));
         }

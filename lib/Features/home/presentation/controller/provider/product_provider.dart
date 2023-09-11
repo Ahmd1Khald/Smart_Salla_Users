@@ -44,7 +44,10 @@ class ProductProvider with ChangeNotifier {
       FirebaseFirestore.instance.collection(AppStrings.productsCollection);
   Future<List<ProductModel>> fetchProducts(context) async {
     try {
-      await productDB.get().then((value) {
+      await productDB
+          .orderBy('createdAt', descending: false)
+          .get()
+          .then((value) {
         print(value.docs.length);
         _products.clear();
         for (var element in value.docs) {

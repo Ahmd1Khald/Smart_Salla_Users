@@ -27,8 +27,8 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
   final GoogleSignIn gSignIn = GoogleSignIn();
 
   Future<void> googleSignIn() async {
-    MyAppMethods.loadingPage(context: context);
     try {
+      //MyAppMethods.loadingPage(context: context);
       // Start the Google Sign-In process
       final GoogleSignInAccount? account = await gSignIn.signIn();
 
@@ -58,11 +58,13 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
             'createdAt': Timestamp.now(),
             'userCart': [],
             'userWishlist': [],
-          }).then((value) =>
-                  AppFunction.pushAndRemove(context, const RoutScreens()));
+          }).then((value) async {
+            await AppFunction.pushAndRemove(context, const RoutScreens());
+          });
         }
         await FirebaseAuth.instance.signInWithCredential(authCredential).then(
-            (value) => AppFunction.pushAndRemove(context, const RoutScreens()));
+            (value) async =>
+                await AppFunction.pushAndRemove(context, const RoutScreens()));
 
         // If sign-in is successful, proceed with the rest of your logic
         // ...

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:salla_users/Features/home/presentation/views/product_details.dar
 import '../../../../../Core/utiles/app_functions.dart';
 import '../../../../../Core/utiles/constance/const_variable.dart';
 import '../../../../../Core/utiles/widgets/custom_heart_botton.dart';
+import '../../../../../Core/utiles/widgets/my_app_method.dart';
 import '../../../../cart/presentation/controller/provider/cart_provider.dart';
 import '../../../../profile/presentation/controller/provider/viewed_recently_provider.dart';
 import '../../../data/models/product_model.dart';
@@ -66,9 +68,23 @@ class LastArrivalProduct extends StatelessWidget {
                           width: 20,
                         ),
                         IconButton(
-                            onPressed: () {
-                              cartProvider.addProductToCart(
-                                  productId: productModelProvider.productId);
+                            onPressed: () async {
+                              // cartProvider.addProductToCart(
+                              //     productId: productModelProvider.productId);
+
+                              try {
+                                await cartProvider.addProductToCartFirebase(
+                                  productId: productModelProvider.productId,
+                                  qty: 1,
+                                  context: context,
+                                );
+                              } on FirebaseException catch (error) {
+                                MyAppMethods.showErrorORWarningDialog(
+                                  context: context,
+                                  subtitle: "Error occured $error",
+                                  fct: () {},
+                                );
+                              }
                             },
                             icon: Icon(
                               cartProvider.isProductInCart(

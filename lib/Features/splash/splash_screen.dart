@@ -1,7 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../root_screens/presentaiton/views/root_screens.dart';
+import 'package:salla_users/Features/auth/presentation/views/login_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -10,8 +9,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: 'assets/images/bag/order.png',
-      splashIconSize: 84,
-      nextScreen: const RoutScreens(),
+      splashIconSize: 90,
+      nextScreen: const LoginScreen(),
       backgroundColor: Colors.orangeAccent,
       curve: Curves.bounceInOut,
       splashTransition: SplashTransition.slideTransition,

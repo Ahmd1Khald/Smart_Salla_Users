@@ -138,6 +138,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                 Center(
                   child: RegisterButton(
                     onPressed: () async {
+                      MyAppMethods.loadingPage(context: context);
                       if (widget.formKey.currentState!.validate()) {
                         if (widget.pickedImage == null) {
                           print('+++++++++++++++++++++++++');
@@ -150,20 +151,23 @@ class _RegisterBodyState extends State<RegisterBody> {
                           );
                         } else {
                           try {
-                            MyAppMethods.loadingPage(context: context);
                             await auth.createUserWithEmailAndPassword(
                               email: widget.emailController.text.trim(),
                               password: widget.passController.text.trim(),
                             );
 
-                            await addDataToFirestore().then((value) =>
-                                AppFunction.pushAndRemove(
-                                    context, const RoutScreens()));
-                            Fluttertoast.showToast(
-                              msg: "An account has been created",
-                              toastLength: Toast.LENGTH_SHORT,
-                              textColor: Colors.white,
-                            );
+                            await addDataToFirestore().then((value) {
+                              Fluttertoast.showToast(
+                                msg: "An account has been created",
+                                toastLength: Toast.LENGTH_SHORT,
+                                backgroundColor: Colors.green,
+                                textColor: Colors.white,
+                              );
+                              AppFunction.pushAndRemove(
+                                  context, const RoutScreens());
+                            });
+                            //Navigator.pop(context);
+                            //Navigator.pop(context);
                           } on FirebaseAuthException catch (error) {
                             await MyAppMethods.showErrorORWarningDialog(
                               context: context,

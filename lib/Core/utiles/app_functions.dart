@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AppFunction {
-  static void pushAndRemove(
+  static Future<void> pushAndRemove(
     BuildContext context,
     Widget screen,
-  ) {
-    Navigator.pushAndRemoveUntil(
+  ) async {
+    await Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => screen),
       (route) => false,
     );
   }
 
-  static void pushTo(
+  static Future<void> pushTo(
     BuildContext context,
     Widget screen,
-  ) {
-    Navigator.push(
+  ) async {
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => screen),
     );

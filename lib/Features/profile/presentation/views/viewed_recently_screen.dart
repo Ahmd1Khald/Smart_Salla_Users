@@ -26,7 +26,7 @@ class ViewedRecentlyScreen extends StatelessWidget {
         ? Scaffold(
             body: EmptyCartWidget(
               function: () {
-                AppFunction.pushAndRemove(context, const RoutScreens());
+                AppFunction.pushAndRemove(context, RoutScreens());
               },
               title: AppStrings.whoopsViewedRecentlyString,
               subTitle: AppStrings.wishListEmptyString,

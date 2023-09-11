@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/utiles/app_functions.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/subtitle_text.dart';
 import 'package:salla_users/Core/utiles/constance/text_styles/title_text.dart';
+import 'package:salla_users/Core/utiles/widgets/my_app_method.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
 import 'package:salla_users/Features/home/presentation/views/product_details.dart';
 
@@ -85,9 +87,22 @@ class ProductItem extends StatelessWidget {
                         child: InkWell(
                           splashColor: Colors.red,
                           borderRadius: BorderRadius.circular(16.0),
-                          onTap: () {
-                            cartProvider.addProductToCart(
-                                productId: getCurrProduct.productId);
+                          onTap: () async {
+                            // cartProvider.addProductToCart(
+                            //     productId: getCurrProduct.productId);
+                            try {
+                              await cartProvider.addProductToCartFirebase(
+                                productId: getCurrProduct.productId,
+                                qty: 1,
+                                context: context,
+                              );
+                            } on FirebaseException catch (error) {
+                              MyAppMethods.showErrorORWarningDialog(
+                                context: context,
+                                subtitle: "Error occured $error",
+                                fct: () {},
+                              );
+                            }
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

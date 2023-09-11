@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
-import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 import 'package:salla_users/firebase_options.dart';
 
 import 'Core/utiles/constance/app_styles.dart';
@@ -13,6 +11,7 @@ import 'Features/cart/presentation/controller/provider/cart_provider.dart';
 import 'Features/home/presentation/controller/provider/user_provider.dart';
 import 'Features/profile/presentation/controller/provider/viewed_recently_provider.dart';
 import 'Features/profile/presentation/controller/provider/wish_list_provider.dart';
+import 'Features/splash/splash_screen.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,20 +32,20 @@ class MyApp extends StatelessWidget {
           options: DefaultFirebaseOptions.currentPlatform,
         ),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: Scaffold(
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                body: const Center(
-                  child: SpinKitPouringHourGlass(
-                    color: Colors.orangeAccent,
-                    size: 50,
-                  ),
-                ),
-              ),
-            );
-          }
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return MaterialApp(
+          //     debugShowCheckedModeBanner: false,
+          //     home: Scaffold(
+          //       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          //       body: const Center(
+          //         child: SpinKitPouringHourGlass(
+          //           color: Colors.orangeAccent,
+          //           size: 50,
+          //         ),
+          //       ),
+          //     ),
+          //   );
+          // }
           if (snapshot.hasError) {
             return MaterialApp(
               home: Scaffold(
@@ -77,7 +76,7 @@ class MyApp extends StatelessWidget {
                   ),
                   //onGenerateRoute: Routes.getRoute,
                   //initialRoute: Routes.loginRoute,
-                  home: const RoutScreens(),
+                  home: const SplashScreen(),
                 );
               },
             ),

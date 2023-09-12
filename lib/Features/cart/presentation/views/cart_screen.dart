@@ -47,8 +47,8 @@ class CartScreen extends StatelessWidget {
                               func1: () {
                                 Navigator.pop(context);
                               },
-                              func2: () {
-                                cartProvider.clearCartItems();
+                              func2: () async {
+                                await cartProvider.clearCartFromFirebase();
                                 Navigator.pop(context);
                               },
                             ));

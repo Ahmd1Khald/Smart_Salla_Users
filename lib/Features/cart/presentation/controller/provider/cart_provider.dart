@@ -16,10 +16,48 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
+  final userDB =
+      FirebaseFirestore.instance.collection(AppStrings.usersCollection);
+
   bool isProductInCart({
     required String productID,
   }) {
     return _cartItems.containsKey(productID);
+  }
+
+  Future<void> removeCartItemFromFirebase(
+      {required String cartId,
+      required String productId,
+      required int qty}) async {
+    User? user = FirebaseAuth.instance.currentUser;
+    try {
+      await userDB.doc(user!.uid).update({
+        "userCart": FieldValue.arrayRemove([
+          {
+            "cartID": cartId,
+            'productID': productId,
+            'quantity': qty,
+          }
+        ])
+      });
+      _cartItems.remove(productId);
+      await fetchCart();
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+    notifyListeners();
+  }
+
+  Future<void> clearCartFromFirebase() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    try {
+      await userDB.doc(user!.uid).update({"userCart": []});
+      _cartItems.clear();
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
   }
 
   void addProductToCart({required String productId}) {
@@ -34,8 +72,6 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  final userDB =
-      FirebaseFirestore.instance.collection(AppStrings.usersCollection);
   Future<void> addProductToCartFirebase({
     required String productId,
     required int qty,

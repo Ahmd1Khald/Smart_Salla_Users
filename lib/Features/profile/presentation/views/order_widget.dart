@@ -6,8 +6,10 @@ import '../../../../Core/utiles/constance/text_styles/title_text.dart';
 import '../../../home/data/models/order_model.dart';
 
 class OrdersWidgetFree extends StatefulWidget {
-  const OrdersWidgetFree({super.key, required this.ordersModelAdvanced});
+  const OrdersWidgetFree(
+      {super.key, required this.ordersModelAdvanced, required this.func});
   final OrdersModel ordersModelAdvanced;
+  final VoidCallback func;
   @override
   State<OrdersWidgetFree> createState() => _OrdersWidgetFreeState();
 }
@@ -46,7 +48,7 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
                         ),
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: widget.func,
                           icon: const Icon(
                             Icons.clear,
                             color: Colors.red,

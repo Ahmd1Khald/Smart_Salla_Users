@@ -41,4 +41,17 @@ class OrdersProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<void> clearOrderFromFirebase({required String orderId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(AppStrings.ordersCollection)
+          .doc(orderId)
+          .delete();
+      orders.clear();
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
+  }
 }

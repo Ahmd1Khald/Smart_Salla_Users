@@ -59,7 +59,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
                   child: OrdersWidgetFree(
-                      ordersModelAdvanced: ordersProvider.getOrders[index]),
+                    ordersModelAdvanced: ordersProvider.getOrders[index],
+                    func: () async {
+                      await ordersProvider.clearOrderFromFirebase(
+                          orderId: ordersProvider.getOrders[index].orderId);
+                    },
+                  ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {

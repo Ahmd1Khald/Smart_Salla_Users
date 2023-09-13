@@ -93,7 +93,7 @@ class ProductItem extends StatelessWidget {
                             try {
                               await cartProvider.addProductToCartFirebase(
                                 productId: getCurrProduct.productId,
-                                qty: 1,
+                                qty: getCurrProduct.productQuantity,
                                 context: context,
                               );
                             } on FirebaseException catch (error) {

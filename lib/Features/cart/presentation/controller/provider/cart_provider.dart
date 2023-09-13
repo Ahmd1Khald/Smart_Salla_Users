@@ -60,13 +60,13 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addProductToCart({required String productId}) {
+  void addProductToCart({required String productId, required int quantity}) {
     _cartItems.putIfAbsent(
       productId,
       () => CartModel(
         cartId: const Uuid().v4(),
         productId: productId,
-        quantity: 1,
+        quantity: quantity,
       ),
     );
     notifyListeners();

@@ -11,6 +11,8 @@ class QuantityBottomSheet extends StatelessWidget {
   final CartModel model;
   @override
   Widget build(BuildContext context) {
+    print(model.quantity);
+    print("+++++++++++");
     final cartProvider = Provider.of<CartProvider>(context);
     return Column(
       children: [
@@ -25,7 +27,7 @@ class QuantityBottomSheet extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: 40,
+            itemCount: model.quantity,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.all(12.0),
               child: InkWell(

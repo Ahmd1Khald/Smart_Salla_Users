@@ -8,7 +8,7 @@ class ProductModel with ChangeNotifier {
   final String productCategory;
   final String productDescription;
   final String productImage;
-  final String productQuantity;
+  final int productQuantity;
   Timestamp? createdAt;
 
   ProductModel({

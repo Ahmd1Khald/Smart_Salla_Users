@@ -136,7 +136,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     ),
                                     onPressed: () {
                                       cartProvider.addProductToCart(
-                                          productId: getCurrProduct.productId);
+                                          productId: getCurrProduct.productId,
+                                          quantity:
+                                              getCurrProduct.productQuantity);
                                     },
                                     icon: Icon(cartProvider.isProductInCart(
                                             productID: getCurrProduct.productId)

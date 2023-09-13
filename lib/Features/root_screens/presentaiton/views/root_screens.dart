@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/user_provider.dart';
 import 'package:salla_users/Features/profile/presentation/controller/provider/wish_list_provider.dart';
 
 import '../../../cart/presentation/controller/provider/cart_provider.dart';
@@ -42,12 +43,14 @@ class _RoutScreensState extends State<RoutScreens> {
   Future<void> fetchFCT() async {
     final productsProvider =
         Provider.of<ProductProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final wishListProvider =
         Provider.of<WishListProvider>(context, listen: false);
     try {
       Future.wait({
         productsProvider.fetchProducts(context),
+        userProvider.fetchUserInfo(),
       });
       Future.wait({
         cartProvider.fetchCart(),

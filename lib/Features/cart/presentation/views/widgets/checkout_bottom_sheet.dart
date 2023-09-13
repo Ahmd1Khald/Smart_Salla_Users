@@ -9,8 +9,11 @@ import '../../controller/provider/cart_provider.dart';
 class CartBottomSheet extends StatelessWidget {
   const CartBottomSheet({
     Key? key,
+    required this.func,
     /*required this.model*/
   }) : super(key: key);
+
+  final VoidCallback func;
 
   //final CartModel model;
   @override
@@ -45,7 +48,7 @@ class CartBottomSheet extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: func,
               child: const Text('Checkout'),
             )
           ],

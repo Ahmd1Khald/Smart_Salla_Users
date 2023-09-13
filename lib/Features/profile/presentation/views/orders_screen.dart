@@ -1,50 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:salla_users/Core/utiles/app_functions.dart';
+import 'package:salla_users/Core/utiles/constance/assets_images.dart';
+import 'package:salla_users/Features/root_screens/presentaiton/views/root_screens.dart';
 
-import '../../../../Core/utiles/app_functions.dart';
-import '../../../../Core/utiles/constance/app_strings.dart';
-import '../../../../Core/utiles/constance/assets_images.dart';
-import '../../../../Core/utiles/widgets/custom_app_bar.dart';
+import '../../../../Core/utiles/constance/text_styles/title_text.dart';
 import '../../../../Core/utiles/widgets/empty_cart.dart';
-import '../../../root_screens/presentaiton/views/root_screens.dart';
+import '../../../home/data/models/order_model.dart';
+import '../../../home/presentation/controller/provider/order_provider.dart';
 import 'order_widget.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
 
-  final bool isEmpty = false;
+  @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
 
+class _OrdersScreenState extends State<OrdersScreen> {
+  bool isEmptyOrders = false;
   @override
   Widget build(BuildContext context) {
-    return isEmpty
-        ? Scaffold(
-            body: EmptyCartWidget(
-              title: AppStrings.whoopsOrderString,
-              subTitle: AppStrings.orderEmptyString,
-              body: AppStrings.looksLikeOrderString,
-              buttonText: AppStrings.shopNowString,
-              image: AssetsImages.bagWish,
-              function: () {
-                AppFunction.pushAndRemove(context, const RoutScreens());
+    final ordersProvider = Provider.of<OrdersProvider>(context);
+    return Scaffold(
+        appBar: AppBar(
+          title: const TitlesTextWidget(
+            label: 'Placed orders',
+          ),
+        ),
+        body: FutureBuilder<List<OrdersModel>>(
+          future: ordersProvider.fetchOrder(),
+          builder: ((context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: SelectableText(
+                    "An error has been occured ${snapshot.error}"),
+              );
+            } else if (!snapshot.hasData || ordersProvider.getOrders.isEmpty) {
+              return EmptyCartWidget(
+                image: AssetsImages.orderBag,
+                title: "No orders has been placed yet",
+                subTitle: "",
+                buttonText: "Shop now",
+                body: '',
+                function: () {
+                  AppFunction.pushAndRemove(context, const RoutScreens());
+                },
+              );
+            }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (ctx, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+                  child: OrdersWidgetFree(
+                      ordersModelAdvanced: ordersProvider.getOrders[index]),
+                );
               },
-            ),
-          )
-        : Scaffold(
-            appBar: customAppBar(
-              [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.delete_forever_rounded,
-                    color: Colors.red,
-                  ),
-                )
-              ],
-              title: AppStrings.ordersString,
-            ),
-            body: ListView.builder(
-              itemBuilder: (context, index) => const OrderWidget(),
-              itemCount: 15,
-            ),
-          );
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider();
+              },
+            );
+          }),
+        ));
   }
 }

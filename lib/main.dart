@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:salla_users/Core/providers/theme_provider.dart';
 import 'package:salla_users/Core/utiles/constance/app_strings.dart';
+import 'package:salla_users/Features/home/presentation/controller/provider/order_provider.dart';
 import 'package:salla_users/Features/home/presentation/controller/provider/product_provider.dart';
 
 import 'Core/utiles/constance/app_styles.dart';
@@ -75,6 +76,9 @@ class MyApp extends StatelessWidget {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => UserProvider(),
+                ),
+                ChangeNotifierProvider(
+                  create: (_) => OrdersProvider(),
                 ),
               ],
               child: Consumer<ThemeProvider>(

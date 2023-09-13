@@ -6,9 +6,12 @@ import 'package:salla_users/Features/cart/data/model/cart_model.dart';
 import '../../controller/provider/cart_provider.dart';
 
 class QuantityBottomSheet extends StatelessWidget {
-  const QuantityBottomSheet({Key? key, required this.model}) : super(key: key);
+  const QuantityBottomSheet(
+      {Key? key, required this.model, required this.quantity})
+      : super(key: key);
 
   final CartModel model;
+  final int quantity;
   @override
   Widget build(BuildContext context) {
     print(model.quantity);
@@ -27,7 +30,7 @@ class QuantityBottomSheet extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: model.quantity,
+            itemCount: quantity,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.all(12.0),
               child: InkWell(

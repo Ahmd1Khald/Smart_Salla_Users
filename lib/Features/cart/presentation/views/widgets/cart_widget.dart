@@ -90,7 +90,9 @@ class CartWidget extends StatelessWidget {
                                     )),
                                     context: context,
                                     builder: (context) => QuantityBottomSheet(
-                                        model: cartModelProvider),
+                                      model: cartModelProvider,
+                                      quantity: getCurrProduct.productQuantity,
+                                    ),
                                   );
                                 },
                                 icon: const Icon(IconlyLight.arrowDown2),

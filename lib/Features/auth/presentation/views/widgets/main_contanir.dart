@@ -82,22 +82,23 @@ class _MainContainerState extends State<MainContainer> {
                       setState(() {
                         isLoading = true;
                       });
-                      if (isLoading == true) {
-                        MyAppMethods.loadingPage(context: context);
-                      }
-
+                      //MyAppMethods.loadingPage(context: context);
                       await auth
                           .signInWithEmailAndPassword(
-                            email: widget.emailController.text.trim(),
-                            password: widget.passController.text.trim(),
-                          )
-                          .then((value) => AppFunction.pushAndRemove(
-                              context, const RoutScreens()));
+                        email: widget.emailController.text.trim(),
+                        password: widget.passController.text.trim(),
+                      )
+                          .then((value) {
+                        //MyAppMethods.loadingPage(context: context);
+                        //Future.delayed(const Duration(seconds: 1)).then((value) => null);
+                        AppFunction.pushAndRemove(context, const RoutScreens());
+                      });
+                      //Navigator.pop(context);
                       Fluttertoast.showToast(
-                        msg: "Login Success!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        textColor: Colors.white,
-                      );
+                          msg: "Login Success!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          textColor: Colors.white,
+                          backgroundColor: Colors.green);
                     } on FirebaseAuthException catch (error) {
                       await MyAppMethods.showErrorORWarningDialog(
                         context: context,
@@ -118,9 +119,6 @@ class _MainContainerState extends State<MainContainer> {
                       setState(() {
                         isLoading = false;
                       });
-                      if (isLoading == false) {
-                        Navigator.pop(context);
-                      }
                     }
                     print(widget.emailController.text.trim());
                     print(widget.passController.text.trim());

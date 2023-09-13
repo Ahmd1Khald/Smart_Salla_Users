@@ -138,7 +138,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                 Center(
                   child: RegisterButton(
                     onPressed: () async {
-                      MyAppMethods.loadingPage(context: context);
+                      //MyAppMethods.loadingPage(context: context);
                       if (widget.formKey.currentState!.validate()) {
                         if (widget.pickedImage == null) {
                           print('+++++++++++++++++++++++++');

@@ -60,8 +60,6 @@ class _HeartButtonWidgetState extends State<HeartButtonWidget> {
                 context: context,
                 subtitle: "Error occurred $error",
                 fct: () {});
-          } catch (error) {
-            print(error);
           } finally {
             setState(() {
               isLoading = false;

@@ -82,7 +82,10 @@ class _MainContainerState extends State<MainContainer> {
                       setState(() {
                         isLoading = true;
                       });
-                      MyAppMethods.loadingPage(context: context);
+                      if (isLoading == true) {
+                        MyAppMethods.loadingPage(context: context);
+                      }
+
                       await auth
                           .signInWithEmailAndPassword(
                             email: widget.emailController.text.trim(),
@@ -115,6 +118,9 @@ class _MainContainerState extends State<MainContainer> {
                       setState(() {
                         isLoading = false;
                       });
+                      if (isLoading == false) {
+                        Navigator.pop(context);
+                      }
                     }
                     print(widget.emailController.text.trim());
                     print(widget.passController.text.trim());

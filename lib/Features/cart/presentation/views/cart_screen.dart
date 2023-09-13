@@ -143,9 +143,13 @@ class _CartScreenState extends State<CartScreen> {
           'userName': userProvider.getUserModel?.userName,
           'orderDate': Timestamp.now(),
         });
+        MyAppMethods.uploadedSuccess(
+            context: context,
+            function: () async {
+              await cartProvider.clearCartFromFirebase();
+              cartProvider.clearCartItems();
+            });
       });
-      await cartProvider.clearCartFromFirebase();
-      cartProvider.clearCartItems();
     } catch (e) {
       MyAppMethods.showErrorORWarningDialog(
         context: context,

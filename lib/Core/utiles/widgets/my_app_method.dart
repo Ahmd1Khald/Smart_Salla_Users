@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../constance/assets_images.dart';
@@ -134,4 +135,16 @@ class MyAppMethods {
           ),
         ),
       );
+
+  static void uploadedSuccess(
+      {required BuildContext context, required function}) {
+    AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.bottomSlide,
+            desc: 'Oder sent Successfully',
+            btnOkOnPress: function,
+            btnOkText: 'OK')
+        .show();
+  }
 }

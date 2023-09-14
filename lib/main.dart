@@ -17,6 +17,10 @@ import 'firebase_options.dart';
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
+  // DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => const MyApp(), // Wrap your app
+  // );
   runApp(const MyApp());
 }
 

@@ -38,7 +38,7 @@ class EmptyCartWidget extends StatelessWidget {
             SubtitleTextWidget(
               label: title,
               color: Colors.orange,
-              fontSize: 40,
+              fontSize: 23,
               fontWeight: FontWeight.w500,
             ),
             const SizedBox(

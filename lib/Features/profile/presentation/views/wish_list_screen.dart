@@ -49,6 +49,7 @@ class WishListScreen extends StatelessWidget {
                               },
                               func2: () {
                                 wishListProvider.clearWishListItems();
+                                wishListProvider.clearCartFromFirebase();
                                 Navigator.pop(context);
                               },
                             ));

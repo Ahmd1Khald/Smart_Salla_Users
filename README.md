@@ -1,6 +1,6 @@
 # salla_users
 
-A new Flutter project.
+The admin app is here => https://github.com/Ahmd1Khald/Smart_Salla_Admin
 
 ## Getting Started
 

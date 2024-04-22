@@ -78,6 +78,7 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
         print('Google Sign-In canceled by user');
       }
     } on FirebaseAuthException catch (error) {
+      print("error => ${error.toString()}");
       await MyAppMethods.showErrorORWarningDialog(
         context: context,
         subtitle: "An error has been occured ${error.message}",
@@ -86,6 +87,7 @@ class _BaskGroundWidgetState extends State<BaskGroundWidget> {
         },
       );
     } catch (error) {
+      print("error => ${error.toString()}");
       await MyAppMethods.showErrorORWarningDialog(
         context: context,
         subtitle: "An error has been occured $error",

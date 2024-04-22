@@ -14,7 +14,7 @@ import '../../../../Core/utiles/widgets/shimmer_appbar.dart';
 import '../controller/provider/product_provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
